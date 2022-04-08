@@ -1,0 +1,22 @@
+<title>Quicksort Parallelism Profiling</title>
+<!-- colour styles for Joel's web pages -->
+<body bgcolor="#f0f0e0" link="#808000" vlink="#808000">
+<font face="arial">
+
+<p>
+<a href="shot1.html">start</a> | 
+<a href="shot10.html">next</a> | 
+<a href="shot8.html">prev</a> | 
+<a href="../../index.html#slideshows">menu</a> 
+<p>
+Whoops.  What went wrong ?  If you step back to the previous
+slide, you will see that the expression being evaluated is
+inside a lambda - abstraction (actually, it is part of a
+pattern set, which amounts to the same thing).  The <code>ls</code>
+value (and in fact the <code>pivot</code>) value are lambda -
+bound variables that do not yet have a value, so evaluation
+cannot proceed.
+<p>
+<center>
+<img src="shot9.gif">
+</center>

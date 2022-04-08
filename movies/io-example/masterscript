@@ -1,0 +1,63 @@
+
+"
+Hand-made script for testing movie applet player.
+(c) J Kyle Kelso 1999
+"
+
+(change-view ("shot0.gif"))
+(change-cursor normal)
+
+(change-comment
+"This example shows the construction of a simple
+interactive program using the Haskell IO functions.")
+(wait)
+
+(change-comment
+"Using the Haskell monad 'do' syntax program can be
+written:
+
+    main = do
+        putStr \"What is your name ? \"
+	name <- getLine
+        putStr (\"Hello \" ++ name)
+")
+(wait)
+
+(change-comment
+"Without the monad syntax this would be a little more
+complicated:
+
+    main =
+        putStr \"What is your name ? \" >>
+	getLine >>= (\name -> 
+	putStr (\"Hello \" ++ name))
+"
+) (wait)
+
+(change-comment
+"The VFPE does not have the 'do' syntax but as we shall see
+the tree layout goes a long way toward making the structure
+of the monad expression clear."
+) (wait)
+
+(change-comment
+"We begin by making a LET binding that will form the top
+level of our Haskell program.  We add a 'main' binding that
+will be the program's entry point."
+) (wait)
+
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (1.gif))
+(change-cursor normal)
+(mouse-sequence)
+(change-view (1.gif 2.gif))
+(mouse-sequence)
+(change-view (1.gif 3.gif))
+(mouse-sequence)
+(change-view (4.gif))
+(mouse-sequence)
+(change-view (5.gif))
+
+)

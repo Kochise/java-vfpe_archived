@@ -1,0 +1,175 @@
+(
+"
+Hand-made script for testing movie applet player.
+(c) J Kyle Kelso 2001
+"
+(change-view (shot4.gif))
+(change-cursor normal)
+(change-comment "This example shows the VFPE interpreter's breakpoint feature.
+Breakpoints are used to show the difference in execution 
+between non-tail-recursive and tail-recursive implementations 
+of a function.")
+(wait)
+
+(change-comment "The function in question is the list-reversing function.
+The textual non-tail-recursive version is:
+
+    reverse [] = []
+    reverse (x:xs) = reverse xs ++ [x]
+")
+(wait)
+
+(change-comment "The tail-recursive version uses an accumulating paramater:
+
+    reverse' = rev [] where
+        rev' a [] = a
+        rev' a (x:xs) = rev'(x:a) xs
+")
+(wait)
+
+(change-comment "Firstly, we need to set the breakpoints.  We are interested
+in viewing each 'step' of the algorithm, so we set a breakpoint
+on the main recursive functions.")
+(wait)
+
+(mouse-sequence m 239 168 m 238 167 m 237 167 m 236 166 m 235 166 m 233 165 m 232 164 m 230 163 m 228 162 m 226 161 m 224 161 m 218 159 m 212 158 m 206 157 m 200 156 m 192 154 m 184 153 m 176 151 m 170 150 m 168 150 m 166 149 m 164 148 m 162 147 m 160 146 m 154 145 m 146 143 m 138 142 m 132 140 m 124 139 m 118 138 m 112 137 m 106 136 m 100 135 m 98 134 m 96 133 m 94 133 m 92 131 m 90 130 m 88 129 m 86 129 m 84 128 m 82 127 m 80 126 m 79 126 m 78 126 m 77 125 m 76 125 m 75 124 m 73 123 m 72 122 m 70 122 m 70 121 m 68 120 m 67 119 m 66 119 m 65 118 m 64 118 m 63 117 c 63 117)
+(change-view (shot4.gif shot5.gif))
+(mouse-sequence m 64 117 m 66 117 m 74 116 m 84 115 m 96 114 m 110 113 m 126 111 m 142 109 m 160 107 m 178 106 m 194 100 m 214 98 m 234 96 m 252 94 m 272 92 m 290 90 m 308 88 m 326 86 m 344 84 m 360 83 m 376 81 m 392 79 m 408 78 m 422 72 m 436 71 m 450 69 m 464 68 m 476 66 m 488 65 m 500 64 m 512 64 m 524 63 m 536 63 m 548 63 m 562 62 m 574 62 m 584 61 m 594 61 m 604 61 m 612 61 m 620 61 m 630 61 m 640 61 m 652 61 m 664 61 m 672 61 m 680 61 m 686 61 m 692 61 m 698 61 m 704 61 m 710 61 m 718 61 m 724 61 m 732 61 m 740 61 m 748 61 m 754 60 m 760 59 m 762 58 m 768 57 m 770 56 m 772 55 m 774 54 m 775 53 m 776 52 m 778 52 m 780 51 m 782 51 m 784 50 m 786 50 m 788 49 m 790 49 m 791 48 c 791 48)
+(change-view (shot4.gif shot5.gif rev-breakpoint-a.gif))
+(mouse-sequence m 790 49 m 789 51 m 789 57 m 788 65 m 787 71 m 786 77 m 786 83 m 785 89 m 784 95 m 782 101 m 781 107 m 781 115 m 779 121 m 779 123 m 778 129 m 778 131 m 777 133 m 777 139 m 777 145 m 777 147 m 776 153 m 776 159 m 775 165 m 774 173 m 773 179 m 772 185 m 771 193 m 770 199 m 769 205 m 768 211 m 768 217 m 767 219 m 766 225 m 765 231 m 764 233 m 764 235 m 763 237 m 763 239 m 763 241 m 763 243 m 763 244 m 763 245 m 763 246 m 762 246 m 761 247 m 761 255 m 760 256 m 759 257 m 758 259 m 757 261 m 756 262 m 755 263 m 754 264 m 753 265 m 752 265 m 751 266 m 750 268 m 751 268 c 751 268)
+(change-view (shot4.gif shot5.gif rev-breakpoint-b.gif))
+(mouse-sequence m 751 266 m 752 265 m 753 264 m 754 262 m 756 261 m 758 260 m 760 258 m 766 256 m 772 254 m 780 252 m 788 246 m 796 244 m 802 242 m 810 236 m 818 234 m 824 228 m 830 227 m 832 225 m 834 224 m 836 223 m 838 221 m 840 220 m 846 219 m 847 217 m 853 216 m 859 215 m 861 213 m 867 212 m 869 212 m 871 211 m 873 210 m 874 210 m 875 210 m 876 210 m 884 210 m 890 210 m 896 210 m 898 210 m 900 210 c 900 210)
+(change-view (shot4.gif))
+(change-comment "For the tail-recursive version, we need to set the breakpoint
+on the auxiliary function 'rev'.")
+(wait)
+
+(mouse-sequence m 899 210 m 897 210 m 895 210 m 889 210 m 883 210 m 875 210 m 865 210 m 853 210 m 839 210 m 825 209 m 809 209 m 793 208 m 775 208 m 759 207 m 743 206 m 725 205 m 709 204 m 693 202 m 673 201 m 655 200 m 639 200 m 621 199 m 605 198 m 589 197 m 571 196 m 553 195 m 537 193 m 523 192 m 509 192 m 495 191 m 483 190 m 471 189 m 461 188 m 449 187 m 439 186 m 429 185 m 417 184 m 405 184 m 395 183 m 385 182 m 375 181 m 363 180 m 353 180 m 341 179 m 329 178 m 317 177 m 305 176 m 295 175 m 285 175 m 275 175 m 267 175 m 259 175 m 253 174 m 245 174 m 237 174 m 229 174 m 221 174 m 213 173 m 203 172 m 193 172 m 183 171 m 175 169 m 165 168 m 155 167 m 147 166 m 139 165 m 131 165 m 123 164 m 115 164 m 109 163 m 107 162 m 105 161 m 103 161 m 101 160 m 99 160 m 97 160 m 91 159 m 85 159 m 79 159 m 73 158 m 67 158 m 65 157 m 59 157 m 57 157 m 55 157 m 54 156 m 53 156 m 52 156 m 53 156 m 54 156 c 54 156)
+(change-view (shot4.gif shot7.gif))
+(mouse-sequence m 56 156 m 62 156 m 70 156 m 80 156 m 90 155 m 100 154 m 112 154 m 120 153 m 130 153 m 138 153 m 148 152 m 158 152 m 170 152 m 180 152 m 192 152 m 206 152 m 218 151 m 230 150 m 244 148 m 260 147 m 276 141 m 292 140 m 308 138 m 324 137 m 340 136 m 354 135 m 368 134 m 382 134 m 396 133 m 410 133 m 422 133 m 434 132 m 444 132 m 456 131 m 466 131 m 474 130 m 486 130 m 500 129 m 514 129 m 530 128 m 544 126 m 560 125 m 576 124 m 588 124 m 600 123 m 610 123 m 618 123 m 626 123 m 634 123 m 640 122 m 646 122 m 652 122 m 658 122 m 664 121 m 670 121 m 676 121 m 684 121 m 692 120 m 702 119 m 712 119 m 722 118 m 732 118 m 742 117 m 752 117 m 760 117 m 768 117 m 774 117 m 780 117 m 786 117 m 788 117 m 790 117 m 792 117 m 794 117 m 795 117 m 797 117 m 799 117 m 805 117 m 811 117 m 817 117 m 823 117 m 825 117 m 827 117 m 829 117 m 830 117 c 830 117)
+(change-view (shot4.gif shot7.gif revp-breakpoint-a.gif))
+(mouse-sequence m 828 117 m 826 117 m 824 118 m 822 120 m 821 126 m 820 132 m 818 138 m 816 144 m 814 152 m 812 160 m 806 168 m 800 174 m 798 180 m 797 186 m 795 188 m 794 194 m 792 196 m 791 202 m 791 210 m 790 216 m 790 222 m 790 228 m 790 234 m 789 235 m 788 241 m 786 247 m 784 253 m 782 259 m 781 265 m 780 271 m 779 277 m 778 279 m 778 280 m 777 286 m 776 287 m 775 288 m 774 289 m 774 290 m 773 291 m 772 293 m 771 295 m 771 296 m 770 298 m 770 299 m 769 300 m 767 302 m 766 304 m 765 310 m 763 311 m 762 313 m 761 314 m 760 320 m 759 320 m 758 321 m 757 321 m 756 322 m 755 322 m 755 328 m 754 328 m 754 329 m 754 330 m 754 331 m 754 332 m 754 338 m 754 339 m 754 340 m 754 339 c 754 339)
+(change-view (shot4.gif shot7.gif revp-breakpoint-b.gif))
+(mouse-sequence m 755 337 m 757 336 m 759 334 m 765 332 m 773 330 m 779 328 m 787 327 m 795 325 m 801 323 m 809 321 m 817 320 m 825 318 m 833 317 m 835 316 m 841 315 m 847 314 m 849 313 m 851 312 m 853 311 m 855 310 m 856 309 m 858 308 m 860 307 m 862 306 m 864 305 m 866 304 m 868 303 m 870 301 m 872 300 m 874 299 m 875 297 m 876 296 m 877 296 m 878 295 m 878 293 m 879 292 m 879 291 m 880 290 m 880 289 m 881 289 m 881 288 m 882 287 c 882 287)
+(change-view (shot4.gif))
+
+(change-comment "First we'll show the non-tail-recursive version.  We'll build
+apply the function to a test list (which happens to be
+[1,2,3,4,5]).")
+(wait)
+
+(mouse-sequence m 880 172 m 874 172 m 868 172 m 860 172 m 852 172 m 842 172 m 832 172 m 820 172 m 808 172 m 794 171 m 780 171 m 764 170 m 744 169 m 722 168 m 700 167 m 676 165 m 650 163 m 622 162 m 596 161 m 570 160 m 546 159 m 524 158 m 502 156 m 482 156 m 464 155 m 446 154 m 428 152 m 414 152 m 400 151 m 384 150 m 368 149 m 352 149 m 338 148 m 324 148 m 310 148 m 296 147 m 284 146 m 272 145 m 260 144 m 248 144 m 236 143 m 222 142 m 208 141 m 196 140 m 186 140 m 176 140 m 170 140 m 164 140 m 162 140 m 161 139 m 159 139 m 157 138 m 155 137 m 149 136 m 143 135 m 137 134 m 131 133 m 125 132 m 117 131 m 109 129 m 103 128 m 97 127 m 91 125 m 85 125 m 79 124 m 73 123 m 65 122 m 59 121 m 53 120 m 51 120 m 49 120 m 48 120 m 47 119 m 46 119 m 45 118 m 43 117 m 42 117 m 41 117 c 41 117)
+(change-cursor grab)
+(mouse-sequence m 41 118 m 41 119 m 42 125 m 42 126 m 42 127 m 42 129 m 42 130 m 42 131 m 41 133 m 41 134 m 41 136 m 41 138 m 41 139 m 41 140 m 41 141 m 41 143 m 41 145 m 41 147 m 41 149 m 41 155 m 40 157 m 40 163 m 40 164 m 40 170 m 40 171 m 40 172 m 40 174 m 40 175 m 40 176 m 39 175 c 39 175)
+(change-view (shot9.gif))
+(change-cursor normal)
+(mouse-sequence m 39 173 m 39 172 m 39 170 m 39 168 m 39 167 m 39 165 m 40 164 m 40 163 m 40 161 m 40 160 m 40 159 m 40 157 m 40 156 m 40 155 m 40 154 m 40 153 m 40 152 m 40 151 m 40 149 m 40 148 m 40 146 m 40 144 m 41 143 m 41 141 m 42 140 m 44 139 m 44 138 m 45 137 m 45 136 c 45 136)
+(change-cursor grab)
+(mouse-sequence m 45 137 m 45 138 m 45 139 m 45 145 m 44 146 m 43 152 m 42 154 m 41 160 m 40 166 m 39 172 m 39 174 m 38 176 m 37 178 m 37 180 m 37 181 m 37 182 m 37 183 m 37 184 m 37 185 m 37 193 m 37 194 m 37 195 m 37 201 m 37 202 m 37 203 m 38 203 m 37 202 m 37 201 c 37 201)
+(change-view (shot10.gif))
+(change-cursor normal)
+(change-comment "We will use the 'evaluate' button, which repeatedly reduces the
+selected expression until it reaches normal form, encounters a
+breakpoint, or reaches a specified number of reductions.  For
+this example, the evaluation controls have been set for
+AOR call-by-need with strict constructors.")
+(wait)
+
+(mouse-sequence m 37 200 m 37 199 m 37 198 m 37 197 m 37 196 m 37 195 m 37 194 m 37 193 m 37 191 m 37 190 m 37 189 m 37 188 m 37 187 m 37 186 m 38 186 m 38 185 m 38 183 m 38 182 c 38 182)
+(change-view (shot11.gif))
+(mouse-sequence m 44 182 m 50 182 m 58 182 m 66 182 m 74 181 m 82 179 m 90 178 m 98 177 m 108 175 m 118 174 m 128 173 m 140 171 m 154 170 m 168 169 m 182 167 m 196 166 m 210 165 m 224 163 m 238 162 m 254 160 m 268 159 m 282 158 m 296 156 m 310 155 m 324 154 m 336 153 m 350 152 m 364 150 m 376 149 m 388 147 m 402 146 m 414 145 m 424 143 m 436 142 m 446 141 m 456 140 m 466 139 m 476 138 m 486 138 m 496 137 m 506 137 m 516 136 m 522 134 m 528 133 m 536 132 m 542 132 m 548 131 m 550 131 m 552 131 m 554 131 m 560 131 m 568 131 m 576 131 m 584 131 m 592 131 m 600 131 m 608 131 m 614 131 m 620 131 m 622 131 m 624 131 m 626 131 m 628 131 m 630 131 m 631 131 m 631 130 m 632 130 m 633 130 m 635 130 m 637 130 m 639 130 m 645 130 m 651 130 m 653 130 m 655 130 m 656 130 m 657 130 m 658 130 m 659 130 m 660 130 m 661 130 m 662 130 m 664 130 m 665 131 m 666 131 c 666 131)
+(change-view (shot12.gif))
+(change-comment "For functions which have had breakpoint, evaluation stops
+after each unfolding of the function definition.")
+(wait)
+
+(mouse-sequence c 666 131)
+(change-view (shot13.gif))
+(wait)
+
+(mouse-sequence c 666 131)
+(change-view (shot14.gif))
+(wait)
+
+(mouse-sequence c 666 131)
+(change-view (shot15.gif))
+(wait)
+
+(mouse-sequence c 666 131)
+(change-view (shot16.gif))
+(wait)
+
+(mouse-sequence c 666 131)
+(change-view (shot17.gif))
+(wait)
+
+(mouse-sequence c 666 131)
+(change-view (shot18.gif))
+(change-comment "Notice how the evaluation created a chain of 'append'
+applications, the length of which was equal to the length
+of the length of the original list, before collapsing
+back to the final result.  If we had put a breakpoint on
+the 'append' function, we could have watched the chain
+collapse step by step.")
+(wait)
+
+(change-comment "Next we'll clear away that result and build the same
+test for the tail-recursive version.")
+(wait)
+
+(mouse-sequence m 665 130 m 664 130 m 663 130 m 662 130 m 661 130 m 659 130 m 657 130 m 651 130 m 645 130 m 639 130 m 633 130 m 627 130 m 625 130 m 623 130 m 621 130 m 619 129 m 617 129 m 615 129 m 613 128 m 607 128 m 601 128 m 595 128 m 593 128 m 591 128 m 590 128 m 589 127 m 587 126 m 585 126 m 584 125 m 585 125 m 587 125 m 589 125 m 591 125 m 592 125 c 592 125)
+(change-view (shot19.gif))
+(change-cursor grab)
+(mouse-sequence m 594 126 m 595 126 m 596 127 m 598 127 m 599 128 m 601 129 m 602 130 m 604 131 m 606 132 m 608 134 m 610 136 m 616 137 m 622 139 m 624 141 m 630 142 m 632 144 m 634 146 m 636 147 m 638 148 m 640 150 m 641 151 m 643 153 m 644 155 m 645 157 m 645 163 m 646 165 m 648 167 m 649 169 m 650 171 m 652 173 m 653 174 m 653 176 m 653 178 m 654 179 m 655 181 m 656 183 m 657 185 m 658 187 m 659 188 m 660 190 m 661 191 m 662 193 m 663 195 m 664 197 m 665 199 m 666 201 m 666 203 m 666 204 m 666 205 m 666 211 m 666 212 m 667 214 m 667 215 m 667 216 m 667 218 m 668 219 m 668 221 m 668 222 m 668 224 m 669 225 m 669 226 m 668 226 m 667 226 c 667 226)
+(change-cursor normal)
+(mouse-sequence m 665 226 m 659 226 m 653 225 m 645 225 m 635 225 m 625 225 m 613 225 m 599 224 m 585 223 m 569 222 m 553 221 m 537 220 m 519 218 m 501 216 m 479 215 m 459 213 m 439 212 m 419 211 m 401 210 m 381 209 m 365 208 m 349 207 m 331 205 m 311 204 m 293 203 m 273 201 m 251 199 m 233 198 m 215 197 m 197 196 m 181 195 m 165 195 m 153 195 m 141 194 m 131 193 m 121 193 m 111 192 m 101 191 m 93 191 m 85 190 m 77 189 m 71 188 m 65 187 m 63 187 m 61 186 m 59 185 m 57 184 m 55 183 m 49 182 m 43 181 m 37 180 m 35 179 m 33 179 m 32 179 m 32 177 m 32 176 m 31 175 m 31 174 m 31 173 m 31 172 m 31 171 m 30 169 m 30 168 m 30 167 m 30 165 m 29 164 m 29 163 m 29 161 m 29 160 m 29 159 m 29 157 m 29 156 m 29 155 m 29 154 m 29 153 m 30 152 m 31 152 m 32 152 c 32 152)
+(change-cursor grab)
+(mouse-sequence m 31 153 m 31 154 m 31 155 m 31 163 m 30 163 m 30 164 m 30 165 m 30 166 m 30 167 m 30 168 m 30 174 m 30 175 m 30 176 m 30 177 m 30 176 m 30 175 m 30 174 c 30 174)
+(change-view (shot20.gif))
+(change-cursor normal)
+(mouse-sequence m 30 173 m 30 172 m 31 171 m 32 170 m 32 168 m 33 167 m 34 166 m 35 165 m 35 164 m 35 163 m 35 162 m 35 160 m 35 159 m 35 158 m 35 156 m 36 155 m 36 154 m 36 152 m 38 151 m 39 150 m 39 149 m 39 148 m 39 147 m 39 146 m 39 144 m 39 143 m 40 143 m 40 142 m 40 141 m 40 140 m 42 139 m 43 139 m 44 138 m 45 137 m 46 136 m 47 136 m 47 135 c 47 135)
+(change-cursor grab)
+(mouse-sequence m 47 136 m 47 137 m 47 138 m 47 140 m 47 141 m 47 142 m 47 148 m 47 149 m 47 150 m 46 156 m 46 157 m 46 159 m 45 160 m 45 161 m 44 163 m 43 165 m 42 166 m 41 167 m 40 169 m 40 171 m 39 172 m 39 173 m 38 174 m 37 176 m 36 177 m 36 179 m 35 179 m 34 181 m 34 183 m 34 185 m 34 186 m 34 187 m 34 189 m 34 190 m 34 191 m 34 192 m 34 198 m 34 199 m 35 200 m 35 206 m 35 207 m 35 208 c 35 208)
+(change-view (shot21.gif))
+(change-cursor normal)
+
+(change-comment "Now let us repeat the evaluation process for this definition.")
+(wait)
+
+(mouse-sequence m 35 210 m 35 209 m 35 208 m 35 207 m 35 206 m 35 204 m 35 203 m 35 202 m 35 200 m 35 199 m 36 198 m 36 196 m 36 195 m 36 194 m 36 192 m 37 191 m 37 190 m 37 188 m 37 187 m 37 186 m 37 185 m 37 184 m 37 183 m 37 182 m 37 181 m 37 180 c 37 180)
+(change-view (shot22.gif))
+(mouse-sequence m 39 180 m 45 180 m 53 180 m 61 180 m 69 180 m 79 180 m 89 179 m 99 178 m 109 177 m 119 176 m 131 175 m 143 173 m 157 171 m 171 170 m 187 168 m 201 166 m 217 164 m 233 163 m 247 162 m 263 160 m 275 159 m 285 159 m 297 158 m 307 158 m 317 158 m 327 157 m 337 155 m 349 154 m 363 152 m 377 150 m 391 148 m 405 147 m 417 145 m 427 144 m 435 143 m 443 143 m 451 142 m 459 142 m 467 141 m 475 140 m 483 140 m 489 140 m 495 139 m 503 139 m 511 139 m 519 139 m 527 139 m 535 139 m 543 139 m 551 139 m 559 139 m 565 139 m 567 139 m 569 139 m 575 139 m 583 139 m 591 139 m 599 139 m 607 139 m 615 139 m 623 138 m 629 138 m 631 138 m 633 137 m 635 137 m 637 136 m 639 136 m 640 136 m 642 135 m 643 135 m 644 135 m 645 134 m 646 134 m 647 133 m 648 132 m 649 132 m 650 132 m 651 131 m 652 131 m 653 130 m 654 130 m 655 129 m 657 128 m 659 128 m 660 127 m 662 127 m 663 127 m 664 127 m 663 127 m 662 126 c 662 126)
+(change-view (shot23.gif))
+(wait)
+
+(mouse-sequence c 662 126)
+(change-view (shot24.gif))
+(wait)
+
+(mouse-sequence c 662 126)
+(change-view (shot25.gif))
+(wait)
+
+(mouse-sequence c 662 126)
+(change-view (shot26.gif))
+(wait)
+
+(mouse-sequence c 662 126)
+(change-view (shot27.gif))
+(wait)
+
+(mouse-sequence c 662 126)
+(change-view (shot28.gif))
+(wait)
+
+(mouse-sequence c 662 126)
+(change-view (shot29.gif))
+(change-comment "Notice how with the tail-recursive definition,
+no long application spine develops: instead, elements
+are transferred from the argument list to the 
+accumulating parameter before being returned.")
+(wait)
+
+(change-comment "That concludes this example.")
+
+)

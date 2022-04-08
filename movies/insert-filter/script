@@ -1,0 +1,143 @@
+(
+"
+VFPE thesis demo movie script.
+Editor example: inserting filter.
+"
+(change-view (shot0.gif))
+(checkpoint)
+(change-comment 
+"In this example we show how a function application can be inserted
+into the interior of an existing expression.  This has the effect
+of composing a new function with a sub-expression of the existing
+expression.  This sort of edit occurs commonly in the top-down 
+programming style (when functionality is being added to a skeletal
+function definition), or when adding functionality during 
+maintainance, or when correcting bugs.")
+(wait)
+
+(change-comment 
+"For this example we will pretend that we start with a visual
+version of the expression:
+
+    let
+        sort zs = ...
+        f ws = ...
+    in \\xs ys->(f xs) ++ (f ys)
+") (wait)
+
+(change-comment
+"We assume that we want to modify the expression so that the result 
+of list append operation is sorted, ie: 
+
+    let 
+        sort zs = ... 
+        f ws = ... 
+    in \\xs ys->sort ((f xs) ++ (f ys)))
+") (wait)
+
+(change-comment "In the case of the textual program the edit would be accomplished 
+by simply poking the cursor into the right place, adding the 
+missing function invocation, adding matching parentheses, and 
+invoking the compiler to check the result.")
+(wait)
+
+(change-comment "During such a textual edit, the program would be in a series of
+inconsistent states, with nonexistent half-formed identifiers and
+mismatch parentheses.  The equivalent VFPE program cannot be
+manipulated in the same way.  We will show a sequence of editing
+operations that completes the edit with syntactically correct
+intermediate states.")
+(wait)
+
+(change-comment "In order to insert the required 'sort' call, we need to expose 
+a placeholder node in the right location.  This involves 
+temporarily re-locating the expression that will be wrapped by 
+the new call.
+
+We create a temporary 'holder' LET expression that will store
+the re-located expression.")
+(wait)
+
+(change-comment "This is done by making a new LET expression and dropping it onto
+a suitable target location.  This location can be anywhere the
+re-locating expression's variables remain in scope.  The node just
+above the edit point is usually handy for this.")
+(wait)
+
+(change-cursor normal)
+(mouse-sequence m 285 322 m 287 323 m 289 323 m 291 323 m 293 323 m 295 323 m 296 324 m 297 324 m 298 324 m 299 324 m 300 324 m 301 325 m 303 326 m 305 327 m 307 327 m 310 327 m 312 327 m 314 327 m 316 327 m 318 327 m 320 327 m 322 327 m 323 327 m 324 327 m 325 327 m 326 327 m 327 327 m 328 327 m 329 327 m 331 327 m 333 327 m 335 327 m 337 327 m 339 327 m 341 327 m 343 327 m 345 327 m 347 327 m 349 327 m 351 326 m 353 326 m 354 326 m 355 326 m 356 326 m 357 326 m 359 326 m 361 326 m 363 326 m 364 326 m 365 326 m 367 325 m 368 325 m 368 324 m 369 324 c 369 324)
+(change-cursor grab)
+(mouse-sequence m 367 324 m 365 323 m 362 323 m 354 323 m 346 323 m 336 323 m 326 321 m 316 321 m 306 317 m 296 315 m 288 311 m 280 309 m 272 305 m 262 301 m 254 297 m 244 291 m 234 287 m 224 283 m 216 277 m 208 273 m 200 267 m 192 261 m 184 255 m 178 249 m 170 243 m 164 237 m 158 229 m 152 223 m 148 217 m 144 213 m 140 207 m 136 201 m 134 195 m 133 193 m 132 191 m 130 185 m 129 183 m 127 177 m 126 175 m 126 173 m 126 171 m 125 170 m 125 168 m 125 166 m 124 165 m 124 163 m 124 162 m 124 160 m 124 159 m 124 158 m 123 157 c 123 157)
+(change-view (shot1.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "Note that if there is pre-existing LET expression in a convienient
+location then it can be used instead of introducing a new one.  In
+this example, the LET containing the 'sort' definition could have
+been used.")
+(wait)
+
+(change-comment "We create a temporary binding for the re-locating expression, cut
+the expression from its position, and drop into in the new binding
+body location.")
+(wait)
+
+(mouse-sequence m 136 161 m 135 161 m 134 161 m 133 161 m 132 161 m 131 161 m 130 161 m 129 161 m 128 161 m 127 162 m 127 163 c 127 163)
+(change-view (shot2.gif))
+(mouse-sequence m 126 163 m 124 163 m 122 163 m 120 163 m 118 163 m 117 164 m 116 164 m 115 165 m 114 165 m 115 165 m 116 165 m 116 164 c 116 164)
+(change-view (shot3.gif))
+(mouse-sequence m 117 165 m 117 166 m 118 167 m 118 168 m 118 169 m 118 170 m 118 171 m 118 172 m 118 173 m 118 174 m 118 176 m 118 178 m 118 180 m 118 182 m 118 184 m 118 185 m 118 186 m 118 187 m 119 188 m 119 189 m 119 190 m 119 191 m 120 192 m 120 193 m 120 194 m 120 195 m 120 196 m 120 197 m 120 198 c 120 198)
+(change-view (shot4.gif))
+(mouse-sequence m 122 198 m 123 197 m 125 197 m 127 197 m 129 196 m 135 194 m 141 192 m 149 192 m 151 191 m 159 189 m 167 187 m 175 187 m 183 185 m 191 183 m 199 181 m 207 179 m 210 179 m 216 177 m 222 175 m 225 175 m 227 174 m 233 172 m 236 172 m 242 170 m 245 170 m 248 170 m 250 169 m 252 168 m 254 167 m 256 167 m 258 166 m 260 165 m 262 164 m 264 164 m 266 163 m 269 163 m 275 161 m 281 159 m 287 157 m 289 156 m 292 156 m 294 155 m 296 154 m 302 152 m 308 150 m 310 149 m 312 149 m 314 148 m 316 147 m 318 147 m 320 146 m 322 146 m 324 145 m 326 144 m 328 144 m 330 143 m 332 142 m 338 140 m 341 140 m 343 139 m 349 137 m 355 135 m 361 133 m 367 131 m 373 129 m 379 127 m 382 127 m 388 125 m 396 125 m 402 123 m 405 123 m 411 121 m 413 120 m 415 120 m 416 119 m 417 118 m 418 118 m 419 118 m 419 117 m 420 116 m 421 115 m 421 114 m 422 113 m 422 112 m 422 111 m 422 110 m 423 110 m 423 109 m 423 108 m 424 108 m 424 107 c 424 107)
+(change-view (shot5.gif))
+(change-cursor grab)
+(mouse-sequence m 423 107 m 422 108 m 421 108 m 420 109 m 418 110 m 416 111 m 412 115 m 406 117 m 400 119 m 394 123 m 388 127 m 382 131 m 376 135 m 370 139 m 364 141 m 360 145 m 354 149 m 348 151 m 344 155 m 338 159 m 332 163 m 328 167 m 324 171 m 320 175 m 314 177 m 308 181 m 304 185 m 298 189 m 292 193 m 286 197 m 280 201 m 272 205 m 264 209 m 256 213 m 248 215 m 244 219 m 238 221 m 232 223 m 229 223 m 223 225 m 217 227 m 214 227 m 208 229 m 202 231 m 199 231 m 196 231 m 190 233 m 182 233 m 176 235 m 168 235 m 165 235 m 162 235 m 160 235 m 158 235 m 156 235 m 154 235 m 152 235 m 151 235 m 150 235 m 149 235 m 148 235 m 147 235 m 145 234 m 143 233 m 141 233 m 139 232 m 137 232 m 135 231 m 134 231 m 133 230 m 132 230 m 130 230 m 129 229 c 128 229)
+(change-view (shot6.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "The sort invocation can then be made and dropped onto the
+newly-exposed PLACEHOLDER.")
+(wait)
+
+(mouse-sequence m 127 228 m 126 226 m 125 224 m 124 223 m 123 221 m 122 219 m 121 217 m 120 216 m 116 212 m 112 208 m 111 206 m 110 204 m 109 202 m 108 200 m 107 198 m 106 196 m 106 194 m 104 188 m 103 186 m 102 184 m 100 178 m 99 176 m 99 174 m 97 168 m 95 162 m 94 160 m 93 158 m 92 156 m 92 154 m 91 152 m 90 150 m 88 144 m 86 138 m 85 136 m 84 134 m 83 132 m 82 130 m 82 128 m 81 126 m 80 124 m 80 122 m 79 120 m 79 118 m 79 117 m 79 116 m 79 115 m 79 114 m 79 113 m 79 112 m 79 111 m 79 110 m 79 109 m 79 108 m 79 107 m 79 106 m 79 105 m 79 104 m 80 104 m 80 103 m 80 102 m 80 101 m 80 100 m 80 99 m 80 98 m 80 99 c 80 99)
+(change-cursor grab)
+(mouse-sequence m 82 100 m 83 102 m 84 103 m 86 104 m 87 106 m 88 108 m 89 109 m 89 111 m 89 113 m 90 115 m 90 117 m 91 119 m 91 122 m 92 124 m 92 126 m 92 128 m 92 130 m 92 132 m 92 134 m 92 136 m 92 138 m 92 140 m 92 142 m 92 144 m 92 146 m 93 148 m 93 150 m 93 152 m 93 154 m 93 156 m 93 158 m 93 160 m 94 162 m 95 163 m 97 169 m 101 173 m 102 175 m 103 177 m 103 179 m 104 180 m 104 182 m 105 184 m 106 186 m 107 188 m 108 190 m 109 192 m 109 194 m 110 194 m 110 195 m 110 196 m 110 197 m 110 198 c 110 198)
+(change-view (shot7.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "The original expression can then be moved back underneith the new
+invocation.")
+(wait)
+
+(mouse-sequence m 112 198 m 116 202 m 118 202 m 120 203 m 122 203 m 124 204 m 126 205 m 128 205 m 130 206 m 131 207 m 133 208 m 135 209 m 136 210 m 137 211 m 138 212 m 139 212 m 140 214 m 141 214 m 142 214 m 143 215 m 144 216 m 145 217 m 146 217 m 147 218 m 148 219 m 149 220 m 151 221 m 153 222 m 154 223 m 155 224 m 156 224 m 157 224 m 158 224 c 158 224)
+(change-view (shot8.gif))
+(mouse-sequence m 159 224 m 161 223 m 167 219 m 175 213 m 183 207 m 193 201 m 203 195 m 213 191 m 221 189 m 229 189 m 232 189 m 240 187 m 243 187 m 249 185 m 255 183 m 261 181 m 267 179 m 270 179 m 276 175 m 282 173 m 288 171 m 294 169 m 300 167 m 306 165 m 312 163 m 318 159 m 326 157 m 332 155 m 340 151 m 348 147 m 356 143 m 364 139 m 374 135 m 384 131 m 394 125 m 404 121 m 414 115 m 424 111 m 430 105 m 438 101 m 444 99 m 445 97 m 446 96 m 447 95 m 447 94 m 447 93 m 446 93 m 444 93 m 440 97 m 438 98 m 436 99 m 434 100 m 433 101 m 432 101 c 432 101)
+(change-view (shot9.gif))
+(change-cursor grab)
+(mouse-sequence m 430 101 m 427 101 m 421 99 m 418 99 m 415 99 m 412 99 m 409 99 m 401 99 m 393 101 m 385 103 m 377 107 m 369 109 m 359 111 m 349 113 m 339 115 m 329 119 m 319 123 m 311 125 m 303 129 m 295 133 m 289 137 m 281 139 m 275 143 m 269 147 m 263 151 m 257 155 m 251 159 m 245 165 m 239 171 m 233 175 m 227 179 m 221 185 m 213 189 m 207 195 m 199 199 m 191 203 m 185 209 m 177 213 m 171 217 m 165 221 m 159 225 m 153 229 m 151 230 m 147 234 m 145 234 m 143 235 m 141 236 m 139 236 m 135 240 m 133 240 m 132 240 m 131 240 m 129 240 m 127 240 m 125 240 m 124 240 m 123 239 m 122 238 m 121 238 m 119 237 m 118 236 m 117 236 m 117 235 m 116 235 m 116 234 m 115 233 m 114 232 m 113 231 m 111 230 m 110 229 m 110 228 m 109 227 m 107 227 m 106 226 m 105 225 c 105 225)
+(change-view (shot10.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "The redundant Let expression can then be removed (by selecting
+it, removing the tmp binding, and reducing it).")
+(wait)
+
+(mouse-sequence m 113 219 m 115 218 m 119 214 m 121 213 m 125 209 m 127 208 m 129 207 m 133 203 m 135 202 m 136 201 m 137 200 m 139 199 m 140 198 m 141 197 m 142 196 m 143 195 m 144 194 m 145 193 m 146 191 m 147 190 m 149 189 m 150 187 m 151 186 m 153 185 m 154 183 m 155 182 m 156 181 m 156 180 m 157 179 m 157 178 m 157 177 m 157 176 m 157 175 m 157 174 m 157 173 m 157 172 m 157 171 m 157 170 m 157 169 m 157 168 m 157 167 m 157 166 m 157 165 c 157 165)
+(change-view (shot10.gif shotL0.gif))
+(mouse-sequence m 159 165 m 160 165 m 161 165 m 163 165 m 165 165 m 168 165 m 171 165 m 179 165 m 187 165 m 195 165 m 205 165 m 215 165 m 225 165 m 237 165 m 249 165 m 261 165 m 273 165 m 285 165 m 297 165 m 309 165 m 321 165 m 331 165 m 343 165 m 353 165 m 363 165 m 373 165 m 383 165 m 393 165 m 401 165 m 409 165 m 417 165 m 425 165 m 433 165 m 441 167 m 449 167 m 452 167 m 460 167 m 463 167 m 466 167 m 474 167 m 482 167 m 490 165 m 498 165 m 506 165 m 512 163 m 515 163 m 518 163 m 521 163 m 529 163 m 537 163 m 545 163 m 548 163 m 551 163 m 554 163 m 557 163 m 560 163 m 563 163 m 566 163 m 568 163 m 569 162 m 570 162 m 570 161 m 571 161 m 572 161 m 574 161 m 576 161 m 579 161 m 582 161 m 584 161 m 589 160 m 590 159 m 591 159 m 592 159 m 593 159 m 594 159 m 595 159 m 596 159 m 598 159 m 599 158 m 600 158 m 601 158 m 601 157 m 602 157 m 601 157 c 601 157)
+(change-view (shot10.gif shotL1.gif))
+(mouse-sequence m 603 157 m 605 156 m 607 155 m 609 154 m 611 153 m 613 152 m 615 151 m 617 151 m 619 150 m 621 149 m 623 148 m 625 147 m 627 146 m 629 145 m 631 144 m 633 143 m 635 142 m 637 141 m 639 140 m 641 140 m 643 139 m 644 138 m 646 137 m 652 135 m 656 131 m 658 130 m 660 129 m 662 128 m 664 127 m 666 126 m 668 125 m 669 124 m 670 123 m 672 123 m 673 122 m 674 121 m 675 120 m 676 120 m 677 119 m 678 119 m 679 119 m 680 119 c 680 119)
+(change-view (shot10.gif shotL2.gif))
+(mouse-sequence m 679 119 m 678 119 m 677 119 m 678 118 m 679 117 m 680 115 m 681 114 m 681 113 m 681 112 m 682 111 m 682 109 m 683 108 m 684 107 m 686 106 m 687 105 m 689 104 m 690 103 m 692 102 m 693 101 m 694 100 m 695 99 m 696 98 m 697 97 m 698 96 m 698 95 m 699 94 m 699 93 m 699 91 m 699 89 m 699 87 m 699 86 m 699 85 m 699 84 m 700 83 m 701 82 m 701 81 m 701 79 m 701 78 m 702 77 m 702 76 m 703 75 m 704 73 m 705 71 m 706 70 m 706 69 m 707 69 m 711 65 m 715 61 m 716 60 m 717 60 m 718 60 m 719 60 c 719 60)
+(change-view (shot14.gif))
+(mouse-sequence m 718 60 m 716 61 m 714 62 m 712 63 m 711 64 m 709 64 m 705 68 m 702 68 m 696 70 m 690 72 m 684 74 m 678 76 m 676 77 m 670 79 m 666 83 m 664 83 m 663 84 m 661 85 m 659 86 m 657 87 m 655 87 m 653 88 m 650 88 m 644 90 m 638 92 m 630 92 m 622 94 m 614 96 m 606 96 m 598 96 m 590 98 m 582 98 m 574 98 m 566 98 m 558 98 m 550 98 m 542 100 m 539 100 m 536 100 m 533 100 m 530 100 m 527 100 m 524 100 m 521 100 m 518 100 m 515 100 m 513 101 m 511 101 m 509 101 m 507 102 m 506 102 m 506 103 m 505 103 m 505 104 m 504 104 m 503 104 m 501 104 m 499 104 m 497 104 m 494 104 m 491 104 m 488 104 m 485 104 m 483 104 m 481 104 m 480 104 m 479 104 c 479 104)
+(change-view (shot15.gif))
+(change-comment "That concludes the tree-interior editing example.")
+(wait)
+
+
+)

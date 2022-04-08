@@ -1,0 +1,158 @@
+<title>A Visual Functional Programming Environment</title>
+
+<!-- colour styles for Joel's web pages -->
+<body bgcolor="#f0f0e0" link="#808000" vlink="#808000">
+<font face="arial">
+
+<p align=left>
+<font size=5>A Visual Functional Programming Environment</font>
+<p align=justify>
+This page contains links to the material comprising
+Joel Kelso's PhD thesis.
+
+<p align=left>
+<font size=4>Abstract</font>
+<p align=justify>
+<blockquote>
+The purported advantages of Visual Programming, as applied to general-purpose 
+programming languages, have remained largely unfulfilled.  The 
+essence of this thesis is that functional programming languages have at 
+least one natural visual representation, and that a useful programming 
+environment can be based upon this representation.
+<p>
+This thesis describes the implementation of a Visual Functional
+Programming Environment (VFPE). The programming environment has several
+significant features. 
+<ul> 
+<li> The environment includes a program
+editor that is inherently visual and interactive: syntactic program
+components have a visual representation and are assembled via a
+graphical interface. 
+<li> The program editor incorporates a static
+analysis system that tracks types for the whole program, making it
+impossible to construct syntactically incorrect or type-incorrect
+programs. Type information is continually and explicitly available to
+the programmer. 
+<li>The environment implements an implicitly typed
+higher-order purely functional language without conforming exactly to
+any particular language with respect to syntactic structures or
+reduction semantics. 
+<li>Programs can be output as source code for an
+existing functional language. 
+<li>The visual representation allows
+for continued experimentation with new syntactic features. Some
+currently included features are algebraic data types, pattern matching,
+and guarded expressions. 
+<li>The environment includes a visual
+interpreter which allows any expression to be reduced in source form,
+with a choice of reduction behaviors. 
+</ul>
+</blockquote>
+
+<p align=left>
+<font size=4>Thesis text</font>
+<p>
+
+<ul>
+<li>As <a href="thesis.pdf">PDF</a> (1.2 Mb)
+<li>As <a href="thesis.ps">PostScript</a> (A4 7.2 Mb)
+<li>As <a href="thesis.sxw">OpenOffice document</a> (5.8 Mb)
+<li>As <a href="thesists.pdf">PDF (for two sided printing)</a>
+<li>As <a href="thesists.ps">PostScript (for two sided printing)</a>
+<li>As <a href="thesists.sxw">OpenOffice document (for two sided printing)</a>
+</ul>
+<p align=left>
+<font size=4>VFPE application (version 0.2)</font>
+<p>
+<ul>
+<li><a href="application/vfpe.jar">Jar archive</a>, (521 kb)
+<li><a href="application/install-no-vm.exe">
+  Windows installer</a>, Java not included (1.9 Mb)
+<li><a href="application/install.exe">
+  Windows installer</a>, Java included (7.8 Mb)
+<li><a href="application/install-x86-linux.bin">
+  x86 Linux installer</a>, Java included (23 Mb)
+<li><a href="application/install-OSX.bin">
+  MacOS</a>, Java not included (2 MB)
+</ul>
+<p>
+Despite my struggle of many years against the encroaching
+tide of software bloat, I have somehow made some
+unknown modification which means it's broken under
+Java 1.1 .  Unless you have Java 1.3 installed, you'd better 
+use a "with Java" installer.
+<p>
+Here is the list of <a href="application/known-bugs.txt">
+known bugs</a>.  Should you wish for some reason to write 
+non-trivial programs using the editor, <em>please</em> read
+the notes on the save format at the top of the bug list.
+
+<p align=left>
+<font size=4>Example programs</font>
+<p>
+<a href="examples/examples.html">Here</a> notes on the included
+example VFPE programs and instructions on how to view them.
+</a>
+
+<p align=left>
+<a name="applets">
+<font size=4>Demonstration applets</font>
+</a>
+<p>
+These applets were intended to run off a CD.  They load many
+large images which will cause delays over a slow network
+connection.  Here is a zip archive containing all the 
+<a href="movies.zip">applets</a> (around 3 Mb).
+<p>
+
+<ul>
+<li><a href="movies/basic-construction.html">Basic construction</a>
+<li><a href="movies/recursive-construction.html">Recursive, 
+	higher-order function construction</a>
+<li><a href="movies/insert-filter.html">Tree interior editing</a>
+<li><a href="movies/abstract-expression.html">Function generalisation</a>
+<li><a href="movies/io-example.html">IO example</a>
+<li><a href="movies/reduction-order.html">Reduction order</a>
+<li><a href="movies/lazy-constructors.html">Lazy constructors</a>
+<li><a href="movies/tail-recursion.html">Tail recursion</a>
+</ul>
+
+<p align=left>
+<a name="slideshows">
+<font size=4>Demonstration slide shows</font>
+</a>
+<p>
+Note that these slideshows contain large images, so it is suggested
+that you maximise your browser window while viewing.  Unlike the
+applets, these slideshows do not show the program after every
+operation.  <a href="slides.zip">Here</a> is a zip archive with
+all the slideshows (around 9 Mb).
+<p>
+
+<ul>
+<li><a href="slides/tree-algorithm-animation/shot1.html">
+  Tree insertion algorithm animation</a>
+<li><a href="slides/sorting-algorithm-animation/shot1.html">
+  Sorting algorithm animation</a>
+<li><a href="slides/sorting-profiling/shot1.html">
+  Sorting profiling</a>
+<li><a href="slides/sorting-parallel-profiling/shot1.html">
+  Quicksort parallelism profiling</a>
+<li><a href="slides/parallel-quicksort-construction/shot1.html">
+  Parallel quicksort</a>
+</ul>
+
+<p>
+
+<p align=left>
+<font size=4>Source Code and Data</font>
+<p>
+Here is the <a href="vfpe-src.zip">Java source code</a> for 
+the VFPE application.
+<br>
+Here is the <a href="typecheck.xls">raw editor timing data</a>
+gathered by the instrumented VFPE (an Excel spreadsheet).
+<p>
+<hr width="50%">
+<img src="smallTower.gif">
+</body>

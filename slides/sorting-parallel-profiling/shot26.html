@@ -1,0 +1,29 @@
+<title>Quicksort Parallelism Profiling</title>
+<!-- colour styles for Joel's web pages -->
+<body bgcolor="#f0f0e0" link="#808000" vlink="#808000">
+<font face="arial">
+
+<p>
+<a href="shot1.html">start</a> | 
+<a href="shot25.html">prev</a> | 
+<a href="../../index.html#slideshows">menu</a> 
+<p>
+As we suspected, the generation of the left sub - list
+actually forced the generation of the right sub - list.
+
+<p>
+What happened ?  Well, in order to fully generate the 
+left side, the <code>partition</code> function had to
+examine the entire input list (because there might have
+been a left - side element at the very end).  The way
+the <code>partition</code> function is written, it also
+generates the right side list on the way through.
+So under a "second evaluation waits for first evaluation"
+strategy, there would be no advantage in parallelising
+here.
+<p>
+That concludes this presentation.
+<p>
+<center>
+<img src="shot26.gif">
+</center>

@@ -1,0 +1,55 @@
+statistics categories
+
+statistics category rename = 167
+statistics category attach = 1049
+statistics category create = 1069
+statistics category detach = 41
+statistics category grow = 98
+statistics category copy = 44
+statistics category shrink = 6
+
+statistics operations
+
+statistics operation rename-binding = 167
+statistics operation create-lambda = 17
+statistics operation create-datatype = 1
+statistics operation attach-value = 875
+statistics operation create-var = 855
+statistics operation grow-guard = 6
+statistics operation create-guard = 5
+statistics operation grow-let = 41
+statistics operation create-pattern = 8
+statistics operation create-let = 17
+statistics operation attach-binding = 156
+statistics operation create-apply = 86
+statistics operation copy-value = 44
+statistics operation detach-value = 41
+statistics operation grow-pattern = 28
+statistics operation create-load = 8
+statistics operation attach-empty-let = 8
+statistics operation create-literal = 60
+statistics operation grow-list = 8
+statistics operation create-list = 2
+statistics operation shrink-let = 6
+
+statistics variants
+
+statistics variant create-var-user = 369
+statistics variant grow-let-function = 7
+statistics variant grow-let-value = 49
+statistics variant create-var-apply = 302
+statistics variant create-var-function = 563
+statistics variant create-var-prim = 496
+statistics variant shrink-let-safe = 6
+
+create syntax = 1069 - 496 (prims) - 369 (user) = 204
+
+pallet create = 204 (syntax) + 496 (prims) = 700
+
+syntax: 19 %
+prims : 46 %
+user  : 35 %
+
+pallet: 65 %
+
+(pallet 0.65 x create 0.43 = 0.28)

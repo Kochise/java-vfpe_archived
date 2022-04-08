@@ -1,2 +1,7 @@
 # vfpe-archived
-[OLD] A Visual Functional Programming Environment 
+
+A Visual Functional Programming Environment
+
+![VFPE](https://raw.githubusercontent.com/Kochise/vfpe-archived/examples/screenshots/parseO-1.bmp)
+
+Archive of http://www.csse.uwa.edu.au/~joel/vfpe/

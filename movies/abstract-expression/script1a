@@ -1,0 +1,45 @@
+(
+"VFPE demonstration script showing generalisation of function.
+(c) J Kyle Kelso 2001"
+(change-comment "In this example we show a function being generalised.
+The sorting implementation pictured here opperates on lists 
+of items for which the '<=' function is defined.  Say we 
+wish to generalise the sorting function to operate on any 
+type on which a total ordering is defined, by providing the 
+comparison operator as a higher-order function parameter.")
+(change-view (shot0.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "In textual terms we want to turn this:
+
+    quicksort [] = []
+    quicksort (x:xs) = let
+        (left,right) = partition xs ([],[])
+        partition [] r = r
+        partition (y:ys) (ls,rs) = 
+            if y < x 
+            then partition ys (y:ls,rs)
+            else partition ys (ls,y:rs)
+        in (quicksort left) ++ (x:(quicksort right))
+")
+(wait)
+
+(change-comment "Into this:
+
+    quicksort-gen p [] = []
+    quicksort-gen p (x:xs) = let
+        (left,right) = partition xs ([],[])
+        partition [] r = r
+        partition (y:ys) (ls,rs) = 
+            if p y x 
+            then partition ys (y:ls,rs)
+            else partition ys (ls,y:rs)
+        in (quicksort-gen p left) ++ (x:(quicksort-gen p right))
+        
+    quicksort = quicksort-gen (<=)
+")
+(wait)
+
+
+)

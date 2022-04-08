@@ -1,0 +1,13 @@
+The problem is that grabbing a variable (either by clicking on a built-in function on
+the source panel or by clicking on a binding node) will actually create a <em>
+function application</em> if the variable has a function-valued type.  When we clicked
+on "f" the first time (to make the head of the result list), the editor knew nothing
+about the type of "f", so the variable created was a bare value, not an application
+of the "f" function.  Now that the editor knows that "f" is a function, grabbing an
+"f" variable actually creates a function application, which won't fit the type of
+the placeholder (which is expecting a function type).  The editor behaves in this
+way because in the majority of cases we actually want to build function applications:
+only in a few cases, such as when we are dealing with higher-order functions, do
+we need to override this behaviour.
+<p>
+<center><a href="tutorial.html">back</a></center>

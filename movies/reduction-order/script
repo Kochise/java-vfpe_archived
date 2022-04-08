@@ -1,0 +1,117 @@
+(
+"
+Hand-made script for testing movie applet player.
+(c) J Kyle Kelso 2001
+"
+(change-view (shot0.gif))
+(change-cursor normal)
+(change-comment "This example shows the steps in a very simple expression
+reduction, and demonstrates the difference between
+applicative-order and normal-order reduction.")
+(wait)
+
+(change-comment "Here is the textual equivalent to this program:
+
+    let
+        bottom = bottom
+        f x y = y * y
+    in f bottom 3
+")
+(wait)
+
+(change-comment "The function 'f' is applied to two arguments, the first of which 
+obviously does not terminate.")
+(wait)
+
+(change-comment "Let us begin reducing the body of the LET expression.")
+(wait)
+
+(mouse-sequence m 150 348 m 150 347 m 149 345 m 148 344 m 147 342 m 146 340 m 146 334 m 144 332 m 143 326 m 141 320 m 139 314 m 137 308 m 131 302 m 129 296 m 127 295 m 127 293 m 126 292 m 125 290 m 124 284 m 123 282 m 122 280 m 122 274 m 121 272 m 120 266 m 119 260 m 117 258 m 115 250 m 113 244 m 111 238 m 110 236 m 109 234 m 108 233 m 107 231 m 107 229 m 106 228 m 105 222 m 104 221 m 103 219 m 102 218 m 101 217 m 101 215 m 100 214 m 98 212 m 96 210 m 94 209 m 93 207 m 91 205 m 89 199 m 87 197 m 85 195 m 79 189 m 73 187 m 72 185 m 70 184 m 70 183 m 69 181 m 67 179 m 65 177 m 63 175 m 62 173 m 61 172 m 60 171 m 59 169 m 58 168 m 57 166 m 56 165 m 55 165 m 55 164 m 54 163 m 53 161 m 52 160 c 53 160)
+(change-view (shot1.gif))
+(mouse-sequence m 53 160 m 54 160 m 56 160 m 62 160 m 68 160 m 76 160 m 84 160 m 90 160 m 96 160 m 102 160 m 108 160 m 114 160 m 120 160 m 126 160 m 132 160 m 138 160 m 146 160 m 154 160 m 164 160 m 174 160 m 184 160 m 192 159 m 202 159 m 214 159 m 226 159 m 236 159 m 248 159 m 260 159 m 272 159 m 284 159 m 296 159 m 306 159 m 316 159 m 326 159 m 334 159 m 342 159 m 348 159 m 350 158 m 356 158 m 357 157 m 359 157 m 361 156 m 367 156 m 369 155 m 371 155 m 377 154 m 383 153 m 389 152 m 397 152 m 403 151 m 411 150 m 417 149 m 423 149 m 425 148 m 427 148 m 429 147 m 431 146 m 433 145 m 435 144 m 437 144 m 437 143 m 438 143 m 438 142 m 438 141 m 438 140 m 440 140 m 441 139 m 441 137 m 442 136 m 442 135 m 442 134 c 442 134)
+(change-view (shot2.gif))
+(change-comment "Well we didn't really even get started.  Let's look at the
+evaluation control settings to see why.")
+(wait)
+
+(mouse-sequence m 441 134 m 439 134 m 437 135 m 435 135 m 429 135 m 423 135 m 417 136 m 411 136 m 405 138 m 403 138 m 401 139 m 399 139 m 397 139 m 396 139 m 395 139 m 393 140 m 392 140 m 391 142 m 389 143 m 388 144 m 387 146 m 386 147 m 385 147 m 384 147 m 383 148 m 382 150 m 381 151 m 380 151 m 380 152 c 380 152)
+(change-view (shot2.gif ec1.gif))
+(change-comment "The evaluation controls are set to AOR (applicative-order)
+and call-by-value reduction.  The first thing the interpreter
+did, therefore, was attempt to evaluate the first argument
+of the application.  The interpreter noticed a cycle in its
+search for a redex, and gave up (notice the message above
+the main panel.")
+(wait)
+
+(change-comment "Note that the detection of a cyclic path is one sufficient
+condition for non-termination.  There are of course other
+non-terminating computations that aren't detected this way.")
+(wait)
+
+(change-comment "We will reset the for the evaluation controls for NOR and
+call-by-need reduction.")
+(wait)
+
+(mouse-sequence m 382 152 m 388 151 m 394 149 m 400 148 m 408 146 m 414 144 m 422 138 m 430 136 m 438 128 m 446 122 m 454 116 m 460 110 m 466 108 m 472 106 m 478 104 m 480 102 m 482 100 m 488 98 m 496 92 m 506 86 m 516 78 m 528 70 m 540 62 m 550 56 m 558 55 m 560 54 m 562 52 m 564 51 m 566 50 m 568 48 m 570 47 m 572 46 m 574 45 m 576 44 m 578 43 m 580 43 m 586 42 m 594 40 m 602 39 m 610 39 m 620 38 m 628 38 m 636 38 m 644 38 m 652 38 m 660 38 m 666 38 m 672 38 m 678 38 m 684 38 m 686 38 m 692 38 m 698 38 m 700 38 m 702 38 m 703 38 m 704 38 m 705 38 m 704 39 m 702 39 m 700 39 m 698 40 m 696 40 m 694 40 m 692 40 m 692 41 m 692 43 m 691 43 m 690 43 m 689 43 m 688 44 c 688 44)
+(change-view (shot2.gif ec2.gif))
+(mouse-sequence m 688 46 m 687 47 m 687 49 m 686 50 m 686 52 m 686 53 m 686 54 m 686 56 m 686 57 m 685 57 m 685 58 m 685 59 m 685 60 m 685 61 m 685 62 m 686 64 m 686 65 m 686 66 m 687 68 m 687 69 m 688 70 c 688 70)
+(change-view (shot2.gif ec3.gif))
+(mouse-sequence m 688 72 m 688 73 m 688 75 m 688 77 m 690 78 m 691 80 m 692 81 m 694 82 m 695 83 m 696 85 m 697 85 m 698 85 m 699 86 m 701 86 m 703 88 m 705 89 m 707 89 m 709 90 m 711 90 m 717 91 m 719 92 m 721 92 m 722 92 m 728 92 m 730 92 m 732 93 m 734 93 m 736 93 m 737 93 c 737 93)
+(change-view (shot2.gif ec4.gif))
+(change-comment "We now repeatedly reduce the application until we reach
+normal form.")
+(wait)
+
+(mouse-sequence m 735 93 m 733 94 m 727 94 m 719 94 m 711 94 m 701 94 m 691 94 m 683 94 m 673 94 m 665 95 m 657 95 m 649 95 m 641 95 m 633 95 m 625 95 m 617 95 m 609 95 m 603 96 m 597 96 m 591 96 m 585 98 m 583 98 m 581 98 m 579 98 m 573 99 m 567 99 m 561 99 m 555 101 m 549 102 m 543 103 m 537 105 m 531 106 m 525 106 m 519 108 m 517 109 m 515 109 m 514 110 m 512 110 m 510 112 m 509 113 m 508 113 m 507 113 m 507 114 m 506 114 m 505 114 m 504 116 m 502 116 m 496 117 m 494 117 m 492 118 m 490 118 m 489 119 m 487 120 m 485 121 m 483 121 m 477 121 m 475 122 m 469 123 m 463 124 m 461 124 m 459 125 m 457 125 m 457 126 m 456 128 m 455 129 m 454 129 m 453 130 m 452 130 m 451 130 m 450 130 m 450 131 c 450 131)
+(change-view (shot3.gif ec4.gif))
+(mouse-sequence m 458 138 m 460 138 m 461 138 m 462 138 m 463 137 m 465 137 m 466 137 m 467 137 m 469 137 m 471 137 m 473 137 m 475 137 m 477 137 m 479 137 m 481 137 m 483 137 m 484 137 m 485 137 m 486 137 m 487 137 m 488 137 m 489 137 m 490 137 m 491 137 m 497 136 m 499 136 m 501 136 m 502 136 m 503 136)
+(change-comment "The first step unfolds the 'f' function definition")
+(wait)
+
+(mouse-sequence c 503 136)
+(change-view (shot4.gif ec4.gif))
+(change-comment "Next the beta-redex (APPLY node with LAMBDA node in the
+function position) is replaced with an environment (LET
+node) which binds the function arguments.")
+(wait)
+
+(mouse-sequence c 503 136)
+(change-view (shot5.gif ec4.gif))
+(change-comment "In the next step, the application of the 'multiply' primitive
+causes the reduction of its argument (since it is strict in
+both arguments).  This causes the 'y' value to be evaluated and
+fetched. Since it is already in normal form (it is a '3' 
+literal), the variable is replaced.")
+(wait)
+
+(mouse-sequence c 503 136)
+(change-comment "As an administrative step, the 'x' binding has been deleted,
+since it is redundant.")
+(wait)
+
+(mouse-sequence c 503 136)
+(change-view (shot6.gif ec4.gif))
+(change-comment "The other 'y' variable is replaced.")
+(wait)
+
+(mouse-sequence c 503 136)
+(change-view (shot7.gif ec4.gif))
+(change-comment "The redundant environment is removed.")
+(wait)
+
+(mouse-sequence c 503 136)
+(change-view (shot8.gif ec5.gif))
+(change-comment "The primitive 'multiply' function is reduced, leaving
+the expression in normal form.")
+(wait)
+
+(change-comment "Notice that the profile information has been updated
+to indicate that the user-defined 'f' function and the
+integer math multiply function have been applied once
+each.")
+(wait)
+
+(change-comment "That concludes this example.")
+
+)

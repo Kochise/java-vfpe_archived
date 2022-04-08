@@ -1,0 +1,24 @@
+<title>Parallel Quicksort</title>
+<!-- colour styles for Joel's web pages -->
+<body bgcolor="#f0f0e0" link="#808000" vlink="#808000">
+<font face="arial">
+
+<p>
+<a href="shot1.html">start</a> | 
+<a href="shot16.html">prev</a> | 
+<a href="../../index.html#slideshows">menu</a> 
+<p>
+And indeed, our parallel version does use significantly
+less reduction cycles that the serial version.
+<p>
+Note that the <em>total</em> number of reduction operations,
+on <em>all</em> parallel branches of the computation are
+still counted in the function profile, but the interpreter
+counts only the maximum of the branches of a parallel tuple
+evaluation rather than the sum.
+<p>
+That concludes this presentation.
+<p>
+<center>
+<img src="shot17.gif">
+</center>

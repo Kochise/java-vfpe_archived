@@ -1,0 +1,133 @@
+<title>VFPE Manual</title>
+<h2>Expression Sources</h2>
+<p>
+Below is a table describing the various expression sources.
+<p>
+
+<table border=1>
+
+<tr>
+<th>Source control</th>
+<th>Grabbed expression becomes</th>
+<th>Rationale</th>
+</tr>
+<tr>
+<td align=center>binding node</td>
+<td>A variable (or application of variable) corresponding to the 
+binding.</td>
+<td>Instantiation of variables.</td>
+</tr>
+<tr>
+<td align=center>if-then button<br><img src="cond.gif"></td>
+<td>A new if-then-else expression with undefined condition, consequent
+and alternetive.</td>
+<td>Creation of conditional expressions.</td>
+</tr>
+<tr>
+<td align=center>let button<br><img src="let.gif"></td>
+<td>A new let-expression, with an undefined body and no variable
+bindings.</td>
+<td>Creation of local definitions.</td>
+</tr>
+<tr>
+<td align=center>apply button<br><img src="arrow.gif"></td>
+<td>A new function application (user is prompted for the number of
+arguments).  The function and arguments are undefined.</td>
+<td>Allows application of higher-order function arguments; explicit
+expression of function application.</td>
+</tr>
+<tr>
+<td align=center>lambda button<br><img src="lambda.gif"></td>
+<td>A new lambda abstration (user is prompted for the number of
+arguments).  The body is undefined, the bindings are variable bindings
+with default names.</td>
+<td>Allows creation of anonymous function-valued expressions.</td>
+</tr>
+<tr>
+<td align=center>datatype button<br><img src="datatyp.gif"></td>
+<td>A new algebraic datatype.  The body (scope) of the expression is
+undefined, and the datatype has no constructors.</td>
+<td>Allows creation of new algebraic data type.</td>
+</tr>
+<tr>
+<td align=center>list button<br><img src="list.gif"></td>
+<td>A new empty list.</td>
+<td>Allows creation of a list.</td>
+</tr>
+<tr>
+<td align=center>patterns button<br><img src="cond.gif"></td>
+<td>A new pattern-set expression (user is prompted for the number
+of arguments).  The new expression has a single pattern, with
+variable bindings and an undefined body.</td>
+<td>Allows creation of pattern-matching function definitions.</td>
+</tr>
+<tr>
+<td align=center>load button<br><img src="load.gif"></td>
+<td>A new expression loaded from a file.</td>
+<td>Allows expressions and programs to persist on disk.</td>
+</tr>
+<tr>
+<td align=center>primitive button<br><img src="prim.gif"></td>
+<td>A new built-in function (or application of built-in function).
+The user is prompted for the function.</td>
+<td>Allows access to built-in functions and constants.</td>
+</tr>
+<tr>
+<td align=center>guards button<br><img src="guard.gif"></td>
+<td>A new guarded expression set.  New expression has one guard-value
+pair, guard and value are undefined.</td>
+<td>Allows creation of guarded expressions.</td>
+</tr>
+
+<tr>
+<td align=center>thread button<br><img src="thread.gif"></td>
+<td>A new interpreter control point.</td>
+<td>Allows control of interpreter parameters and single-step
+evaluation.</td>
+</tr>
+
+<tr>
+<td align=center>literal field<br><img src="literal.gif"></td>
+<td>A new literal expression.  Integers, floats, characters and
+strings are supported.</td>
+<td>Allows creation of basic data items.</td>
+</tr>
+
+<tr>
+<td align=center>primitive function buttons</td>
+<td>A new built-in function (or application of built-in function).</td>
+<td>Provides quick access to common primitives.</td>
+</tr>
+
+<tr>
+<td align=center>cut control</td>
+<td>The subexpression that the control panel was summoned for.</td>
+<td>Allows movement and deletion of subexpressions.</td>
+</tr>
+
+<tr>
+<td align=center>copy control</td>
+<td>A copy of the subexpression that the control panel was summoned for.</td>
+<td>Allows duplication of subexpressions, useful for saving and writing
+expressions.</td>
+</tr>
+
+<tr>
+<td align=center>make variable control</td>
+<td>A varible corresponding to the subexpression that the control panel 
+was summoned for.</td>
+<td>Instantiation of variables.</td>
+</tr>
+
+<tr>
+<td align=center>binding name label on let node</td>
+<td>A variable (or application of variable) corresponding to the 
+binding.</td>
+<td>Instantiation of variables.</td>
+</tr>
+
+</table>
+
+<center>
+<a href="index.html">contents</a>
+</center>

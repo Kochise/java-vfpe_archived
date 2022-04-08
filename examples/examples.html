@@ -1,0 +1,60 @@
+<title>A Visual Functional Programming Environment</title>
+
+<!-- colour styles for Joel's web pages -->
+<body bgcolor="#f0f0e0" link="#808000" vlink="#808000">
+<font face="arial">
+
+<p align=left>
+<font size=4>Example Programs</font>
+<p>
+To view the example programs:
+<p>
+<ol>
+<li> Start the VFPE application.
+<li> Press the "load from file" pallet button (the picture of a folder).
+<li> Browse to the CD "examples" folder.
+<li> Select a ".sfe" (serialised functional expression) file and
+press the "open" button.  This will pick up the selected program.
+<li> Drop the program onto the placeholder at the top of the
+editor "Main Expression" panel.
+</ol>
+
+<p>
+
+<font size=3 face=courier>Sorting.sfe</font> contains functional implementations of 
+three classic sorting algorithms. 
+
+<p>
+
+<font size=3 face=courier>ParserCombinators.sfe</font> contains a set of parser combinators:
+higher-order functions for building parsers. These functions look quite
+elegant, with the symmetries between, say, the sequencer and alternater
+combinators being clearly visible. The visual version of this program
+differs from the textual version: in the visual version it is clearer to
+omit the intermediate named expressions, which exist only to avoid very
+long lines of text.
+
+<p>
+
+<font size=3 face=courier>Datum.sfe</font> is a data type and parser for LISP-like
+expressions. The parser is constructed from the parser combinators. This
+program makes heavy use of partially-applied functions.
+
+<p>
+
+<font size=3 face=courier>Dict.sfe</font> is a
+balanced binary tree (red-black tree) implementation of a finite map
+type. A by-product of using tree layout of functional programs is a
+particular clarity in the expression of algorithms that operate of
+tree-structured data. An example of this is in the tree-balancing
+functions in the red-black tree implementation. The algorithm most
+clearly described with tree diagrams. The translation
+into procedural code usually involves complicated nested conditionals.
+Functional implementations that make use of pattern-matching are much
+clearer, and the VFPE implementation is slightly
+clearer again (actually looking like the original diagrams). 
+
+<p>
+<a href="../index.html">Back</a>
+
+</body>

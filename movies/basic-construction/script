@@ -1,0 +1,78 @@
+(
+"VFPE demonstration script showing construction of \"1+1\" expression.
+(c) J Kyle Kelso 1999"
+(change-comment "This demonstraction shows the basic VFPE editing operations.
+In this example we will construct the expression \"1+1\" and evaluate it.")
+(change-view (shot0.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "At the root of this expression is an application of the addition function.
+To create the addition we need the integer-math group of library functions.
+We click on the INT-MATH button.")
+(mouse-sequence m 187 251 m 191 252 m 195 253 m 199 255 m 209 257 m 219 261 m 223 265 m 233 268 m 245 270 m 255 271 m 259 273 m 269 275 m 279 277 m 289 280 m 301 283 m 313 285 m 325 286 m 335 287 m 338 287 m 340 287 m 342 287 m 343 287 c 343 287)
+(change-view (shot1.gif))
+(wait)
+
+(change-comment "Next we \"pick up\" an addition expression by clicking on the plus button.
+Note how the cursor changes to indicate that we have now grabbed and expression,
+and how the information panel in the top right corner displays some information
+about the grabbed expression.")
+(mouse-sequence m 347 287 m 357 286 m 367 285 m 371 284 m 381 284 m 385 284 m 388 284 m 390 284 m 392 284 m 393 283 m 394 283 m 397 283 m 401 283 m 404 283 m 406 283 m 407 283 m 408 283 c 408 283)
+(change-view (shot2.gif))
+(change-cursor grab)
+(wait)
+
+(change-comment "To build onto our initially empty program, we drop the grabbed expression onto
+the PLACEHOLDER in the main expression part of the editor.  The placeholder is
+replaced by the new expression: an addition function with two new placeholders
+for its arguments.
+
+Notice how the cursor changes back to its \"empty\" condition.")
+(mouse-sequence m 387 261 m 343 225 m 307 197 m 275 169 m 239 159 m 207 147 m 195 137 m 183 133 m 173 129 m 169 126 m 166 123 m 154 119 m 144 109 m 134 106 m 124 104 m 120 102 m 117 100 m 113 99 m 103 99 m 93 99 m 83 99 m 79 99 m 75 98 m 71 97 m 68 96 m 65 95 m 62 94 m 58 93 m 55 93 m 52 93 m 49 92 m 46 92 m 44 92 m 41 91 m 39 91 m 37 91 m 35 91 m 34 91 m 33 91 c 33 91)
+(change-view (shot3.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "Next we need to fill in the arguments of the expression.  To create a \"1\"
+literal, we click in the literal entry area next to the LITERAL button, type
+a 1 into the area and then press the LITERAL button to grab the integer literal
+expression.")
+(mouse-sequence m 49 103 m 53 135 m 63 167 m 67 203 m 77 235 m 89 267 m 93 279 m 97 315 m 109 327 m 119 359 m 129 387 m 139 415 m 149 427 m 153 437 m 163 469 m 175 479 m 179 483 m 182 487 m 185 489 m 187 490 m 188 491 m 198 501 m 208 529 m 218 541 m 246 551 m 256 563 m 330 570 m 332 570 m 334 570 m 336 569 m 338 569 m 340 569 m 341 569 m 342 569 m 339 568 m 336 567 m 332 566 m 328 564 m 324 562 m 321 560 m 318 558 m 316 557 m 314 556 m 312 556 m 311 556 m 310 556 m 309 555 m 308 555 m 307 555 m 306 555 c 306 555)
+(change-view (shot4.gif))
+(change-cursor grab)
+(wait)
+
+(change-comment "This literal is dropped onto one of the PLACEHOLDERS.")
+(mouse-sequence m 303 553 m 293 551 m 283 548 m 271 544 m 243 534 m 211 524 m 183 496 m 155 484 m 123 452 m 87 440 m 75 412 m 47 384 m 35 356 m 23 328 m 13 316 m 9 304 m 2 157 m 6 154 m 9 151 m 11 149 m 13 147 m 14 145 m 15 143 m 17 141 m 20 138 m 23 134 m 25 131 m 26 129 m 27 128 m 27 127 m 28 125 m 29 123 m 30 122 m 31 121 m 32 120 m 33 120 c 33 120)
+(change-view (shot5.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "We grab another 1 literal by clicking on the LITERAL button again...")
+(mouse-sequence m 37 130 m 40 140 m 50 172 m 62 184 m 72 212 m 100 244 m 110 272 m 138 304 m 166 336 m 178 368 m 206 400 m 216 428 m 228 464 m 240 476 m 244 479 m 246 480 m 247 484 m 250 494 m 254 497 m 257 499 m 258 500 m 259 500 m 260 501 m 261 502 m 262 503 m 263 503 m 263 506 m 264 509 m 267 513 m 271 516 m 274 519 m 276 529 m 279 532 m 281 534 m 282 535 m 284 539 m 287 543 m 289 545 m 290 546 m 291 547 m 293 549 m 294 551 m 295 552 m 296 553 m 297 554 m 298 555 m 299 557 m 300 558 m 300 559 m 301 561 m 302 562 m 302 563 c 302 563)
+(change-view (shot6.gif))
+(change-cursor grab)
+(wait)
+
+(change-comment "... and drop it onto the other placeholder.")
+(mouse-sequence m 274 551 m 264 519 m 236 491 m 224 459 m 196 431 m 184 399 m 172 371 m 162 343 m 134 311 m 130 283 m 118 271 m 114 259 m 111 255 m 108 245 m 104 235 m 101 231 m 98 227 m 95 217 m 93 207 m 92 203 m 91 199 m 90 189 m 89 185 m 88 182 m 88 180 m 88 179 m 88 177 m 88 167 m 87 163 m 85 151 m 84 147 m 82 143 m 80 140 m 77 137 m 74 135 m 71 131 m 69 127 m 67 124 m 65 122 m 64 121 m 63 121 m 62 121 m 61 121 m 60 120 m 59 120 m 58 120 c 58 120)
+(change-view (shot7.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "We have constructed the \"1+1\" expression: now we wish to evaluate it.
+To do this we select the root of the expression by clicking on the plus
+node.  Notice how the node changes appearence to show that it has been
+selected.")
+(mouse-sequence m 57 118 m 56 116 m 55 114 m 53 111 m 50 108 m 48 106 m 46 105 m 45 104 m 44 102 m 44 100 m 44 98 m 43 97 m 42 95 m 41 94 m 40 93 m 39 92 m 39 91 m 39 90 m 38 90 c 38 90)
+(change-view (shot8.gif))
+(wait)
+
+(change-comment "The expression is evaluated by clicking on the green \"evaluate\" button.")
+(mouse-sequence m 42 90 m 46 90 m 58 91 m 70 91 m 82 92 m 110 92 m 120 93 m 132 93 m 144 94 m 148 94 m 151 94 m 154 95 m 164 96 m 174 97 m 178 97 m 188 98 m 198 99 m 210 101 m 242 102 m 254 103 m 286 104 m 296 105 m 300 106 m 310 107 m 320 108 m 330 108 m 340 109 m 350 109 m 360 109 m 370 109 m 380 109 m 384 109 m 388 108 m 390 108 m 392 108 m 393 108 c 393 108)
+(change-view (shot9.gif))
+(wait)
+
+
+)

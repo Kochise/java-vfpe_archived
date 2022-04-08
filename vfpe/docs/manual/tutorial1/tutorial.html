@@ -1,0 +1,239 @@
+<title>VFPE Tutorial</title>
+<body>
+<h2>Tutorial 1: Editor</h2>
+
+<p>
+This tutorial assumes that the user is familiar with functional programming in
+gerneral, but not with the VPFE system.
+<p>
+
+<h3>Construction of the "map" function.</h3>
+
+This brief tutorial is a step-by-step guide through the definition of the "map"
+function.  The example shows the VPFE facilities for higher-order functions, 
+recursion and pattern-matching.  In Haskell, the function we will define can be
+expressed as: <br>
+<pre>
+    myMap f []     = []
+    myMap f (x:xs) = (f x) : (myMap f xs)
+</pre>
+<p>
+
+
+<h3>Step-by-Step Guide</h3>
+
+During the contruction process, we suggest that that you make use of the "tool-tip"
+information capability to look at the types of various nodes.  If the pointer is left to
+linger over a node for a few seconds, a label should pop up near the node, showing the
+currently inferred type of the node and into which syntactic catagory it falls.  For
+further information on the various syntactic catagories, see <a href="../catagories.html">
+here</a>.
+<p>
+
+<ul>
+
+<li>
+Over on the right of the VFPE window is the <em>pallet</em> panel.  Part of the panel
+is dedicated to <em>source</em> buttons, which are used to create new functional 
+subexpressions.  In order to create the map function, we need to create a definition 
+context in which the name "myMap" will be bound to the value of the map function.  
+Click (with the left button on a multiple button mouse) on the <b>Let</b> button on the
+sources panel.
+<br>
+Note that the cursor changes to indicate the fact that a subexpression has been
+<em>grabbed</em>.  The "info" panel at the top of the pallet will also show the grabbed
+expression.
+<br>
+<p><center>
+<img src="tute1.gif"><br>
+The main VPFE window, with a grabbel "Let" node.
+</center><br>
+
+<li>
+On the left of the VFPE window is the main expression panel.  It contains
+a view of the top-level of the program being edited.  
+<br>
+In any visual function expression, the question mark nodes represent parts of 
+the program that are undefined ie that have yet to be built.  Underneith the 
+<b>prelude</b> node (which represents all the built-in and primitive function 
+definitions) is a placeholder node: this is the starting state of an empty visual 
+functional program, which is completely undefined.
+<br>
+The main program construction operation consists of defining part of an undefined
+program.  This is achived by <em>dropping</em> a grabbed subexpression onto a placeholder
+node.  To perform the drop, click on the placeholder node to add the <b>Let</b> 
+expression to the program.
+
+<br>
+<p><center>
+<img src="tute2.gif"><br>
+After the "Let" node has been dropped in.
+</center><br>
+
+<li>
+We now have an empty list of definitions, to which we can add our own function
+bindings.  We want to add a binding for the myMap function, so click on the "plus"
+button on the Let node.
+<br>
+In the text field of the dialog that pops up, type "myMap f xs" in order to name
+the function and its arguments.  Check the "make pattern set" check box (since we
+want to make a function defintion with a set of pattern-matching equations), then
+click "OK".
+
+<p><center>
+<img src="tute3.gif"><br>
+The "new binding" dialog.
+</center><br>
+
+<li>
+Right click (or control-click) on the "mapMap" label that now appears in the Let
+node.  This will open a window containing the definition of the myMap function.  
+In general, left-clicking will pick up or drop a subexpression, while right-clicking
+will reveal information about a node.
+
+<p><center>
+<img src="tute4.gif"><br>
+The window showing the definition of the "myMap" function.
+</center><br>
+
+<li>
+We now will construct the first equation of the function definition.  We need to
+build a pattern (the equation's "left hand side") that will match the empty list.  
+On the sources pallet, click on the "data" primitive button from the middle column 
+of buttons.  This will show the group of built in functions related to data items.  
+Pick up a empty list node (the "Nil" button).
+
+<p><center>
+<img src="tute5.gif"><br>
+The "sources" panel with the "data" built-in function group selected.
+</center><br>
+
+<br>
+Under the <b>Patterns</b> node in the myMap definition window should be three nodes.  The
+left two are binding nodes representing the formal parameters.  Drop the <b>Nil</b>
+subexpression onto the "xs".  This converts the variable pattern to a constructor
+pattern.
+
+<li>
+We now need to make the body of the first equation (the "right hand side").  Grab
+a <b>Nil</b> subexpression (in the same way as the previous step) and drop it onto the
+placeholder underneith the <b>Patterns</b> node.  We have now completed the first 
+equation, defining the map of the empty list to be the empty list.
+
+<p><center>
+<img src="tute6.gif"><br>
+The first pattern completed.
+</center><br>
+
+<li>
+We now need to add a second pattern (or equation) to the definition.  To do this we
+need to make use of the <em>subexpression control panel</em>.  Right click (or
+control-click) on the <b>Patterns</b> node.  Right-clicking on any node will bring up 
+a control panel with controls and information specific to the sort of node selected.
+In this case we wish to add a new pattern, so click on the "add pattern after" button.
+At the dialog that prompts for variable names, type "f xs" and press return (or click
+the OK button).
+
+<p><center>
+<img src="tute7.gif"><br>
+The subexpression control panel for a "Patterns" node.
+</center><br>
+
+<br>
+To display the new pattern, click on the right-pointing arrow button on the <b>Pattern</b>
+node.  For node types that display one of a set of alternative subexpressions as
+part of their layout (such as patterns, guarded expressions and lists), the right and
+left arrows on the node face step up and down through the alternatives.
+
+<li>
+Next we want to make a pattern that will match a list with at least one element, and
+bind names to the head and tail of that list.  Grab a "Cons" subexpression from the
+data source panel, and drop it onto the "xs" variable.  Note that in the names bound
+to the head and tail are given default values ("x" and "xs" in this case).  It is
+possible to globally rename variables using the binding node's control panel (since
+the VPFE does not use the textual name of the variable to identify it, the renaming
+will not result an any name clashes).
+
+<p><center>
+<img src="tute8.gif"><br>
+The second pattern , with the "Cons" constructor pattern in place.
+</center><br>
+
+<li>
+We need to contruct the body (right hand side) of the second equation.  The root of this
+expression is a list constructed with the "Cons" data constructor.  Grab a "Cons"
+node from the data source panel, and drop it onto the placeholder.  
+
+<li>
+As the head of the result list, we need to apply the function argument "f" to the
+head of the list argument "(x : xs)".  Pick up an <b>Apply</b> node by clicking
+on the apply button on the sources panel.  This will prompt for the number of 
+arguments to apply: choose "1".  Drop the <b>Apply</b> node onto the left-hand
+placeholder child of the <b>Cons</b> node.  The new <b>Apply</b> node will have
+two placeholders of its own, one for the function being applied and one for the
+argument.
+
+<p><center>
+<img src="tute9.gif"><br>
+The second pattern, after adding the "Apply" node.
+</center><br>
+
+<li>
+Click on the "f" variable binding node.  This will create and grab a variable for
+the "f" binding.  Drop the variable into the left placeholder of the <b>Apply</b>
+node.
+
+<li>
+Similarly, grab a "x" variable by clicking on the "x" binding node.  Drop the variable
+into the right placeholder of the <b>Apply</b> node.
+
+<li>
+We can neaten this up by hiding the <b>Apply</b> node.  Bring up the control panel
+for the node (by right-clicking on it), and check the "hide apply" checkbox.
+
+<li>
+Next, we need to made the tail of the result list (this part contains the recursive
+call).  Grab an application of the "myMap" function by clicking on the "myMap" binding 
+node, which appears at the very top of the window.  Drop it onto the remaining
+placeholder.  At the point, enough of the function has been defined to determine that
+it has two arguments, so the <b>myMap</b> node has two placeholder children.
+
+<li>
+The next bit is a little tricky.  We need to put a an "f" variable into the left-hand
+placeholder of the <b>myMap</b> node.  Doing the obvious thing ie grabbing an "f" 
+variable and dropping it in will produce and error: we suggest you do it anyway for
+educational purposes.  You should see a type-checking failure message in the message
+area at the bottom of the editor window (which is unfortunately not very informative
+at this time).  <a href="footnote1.html">Here's</a> an explanation (that can safely
+be ignored for now).
+<br>
+If you grabbed an "f" variable, get rid of it by dropping it in the "rubbish bin"
+button on the <em>sinks</em> panel.
+<br>
+Un-check the "apply variables" checkbox on the <em>info</em> panel on the pallet.
+Now grab an "f" variable and drop it into the left-hand placeholder (this should
+now work).  Check the "apply variables" checkbox and continue with the construction.
+
+<li>
+Finally, grab an "xs" variable, and drop it into the remaining placeholder.  The
+function definition is now complete.
+ 
+<p><center>
+<img src="tute10.gif"><br>
+The complete second pattern.
+</center><br>
+
+<li>
+We could now save the program.  To do this bring up the control panel for the 
+<b>Let</b> node in the main VFPE window.  Click on the "copy" button.  This will
+grab a copy of the expression (in this case the expression is rooted at the "Let"
+value, which contains the whole program).  Drop this onto the "save" button on the
+<em>sinks</em> on the pallet.  This will bring up a standard file-save dialog (we
+tend to save expressions as files with an ".sfe" extension, for "serialised functional
+expression").
+
+</ul>
+
+<center>
+<a href="../index.html">contents</a>
+</center>

@@ -1,0 +1,412 @@
+(
+"VFPE demonstration script showing construction of map function.
+(c) J Kyle Kelso 1999"
+
+(change-comment
+"This demonstration shows the construction of a higher-order recursive function with the
+VFPE. During the demonstraction we will show how the VFPE gradually infers the type of the
+function while it is constructed.")
+(change-view (shot0.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment
+"In this demonstration we will build the map-over-lists function. In Haskell, we can write
+this function with two pattern-matching equations:
+
+    myMap f [] = []
+    myMap f (x:xs) = (f x) : (myMap f xs)
+
+")
+(wait)
+
+(change-comment
+"The demonstration will also show how user-defined functions are declared and defined. In
+order to introduce a new function, we need to create a binding scope in which the function
+will be defined.")
+(wait)
+
+(change-comment
+"We click on the LET pallet button to grab a new empty local definition scope. In order to
+reduce the size of this demonstration, changes in the node information panel at the top of
+the pallet will not be shown, although cursor changes will be.")
+(mouse-sequence)
+(change-cursor grab)
+(wait)
+
+(change-comment
+"The new LET expression is dropped onto the main program placeholder. Each LET expression
+consists of a set of (possibly mutually recursive) definitions, and a main value.")
+(mouse-sequence)
+(change-cursor normal)
+(change-view (shot1.gif))
+(wait)
+
+(change-comment
+"To create a new definition, we press the \"plus\" button on the LET node. This will pop
+up a dialog which prompts for the name of the definition.")
+(mouse-sequence)
+(change-view (shot1.gif nameRqEmpty.gif))
+(wait)
+
+(change-comment
+"We type in the name of our new function, \"myMap\". We can also specify the number of
+arguments to the function (by typing in argument names), and whether or not a
+pattern-matching definition should be created. These details do not have to be provided at
+this point (they can be specified later), but it is convienent to do so.")
+(change-view (shot1.gif nameRqFull.gif))
+(wait)
+
+(change-comment
+"Clicking OK on the dialog creates the new definition, which is shown as a label on the
+LET node.")
+(mouse-sequence)
+(change-view (shot2.gif))
+(wait)
+
+(change-comment
+"Our new definition has an empty body containing placeholders. To define the function, we
+need to construct its body. We RIGHT-CLICK (or CTRL-CLICK) on the name of the definition
+on the LET node to bring up a window showing the body of the definition.")
+(mouse-sequence)
+(change-view (shot2.gif shot3.gif))
+(wait)
+
+(change-comment
+"The new window is a BINDING FRAME. It shows a local-definition binding and the expression
+that is the value of the binding. Throughout the VFPE, name bindings are shown as nodes
+with rounded ends. At the root of the binding frame is the binding node for the \"myMap\"
+definition.")
+(wait)
+
+(change-comment
+"Before we begin construction, let's look at the currently inferred type of our function.
+We move the cursor over the root binding node and let it linger there.")
+(mouse-sequence)
+(change-view (shot2.gif type0.gif))
+(wait)
+
+(change-comment
+"A pop-up \"tool-tip\" window appears, showing the category and type of the node.
+Currently the type of the binding is \"a -> b -> c\", showing that the only information
+that the VPFE has about the binding is that it is a function of two arguments of generic
+type.")
+(wait)
+
+(change-comment
+"OK, let's get down to business. Let's build the first of the \"myMap\" equations. In
+Haskell, this would be:
+
+    myMap f [] = []")
+(wait)
+
+(change-view (shot2.gif shot3.gif))
+(change-comment
+"We need to put in the empty-list constructors (the \"[]\"s), both for the pattern on the
+left of the equation and the value on the right. We select the DATA primitive function
+group from the pallet, which contains the constructor functions for the list and tuple
+data types and so forth.")
+(mouse-sequence)
+(change-view (shot4.gif shot3.gif))
+(wait)
+
+(change-comment
+"We grab an empty-list constructor function (\"Nil\") by clicking on the NIL pallet
+button.")
+(mouse-sequence)
+(change-cursor grab)
+(wait)
+
+(change-comment
+"We drop the nil list expression onto the \"xs\" binding node to build the constructor
+pattern.")
+(mouse-sequence)
+(change-cursor normal)
+(change-view (shot4.gif shot5.gif))
+(wait)
+
+(change-comment
+"If we again let the cursor linger over the root binding node, we can see the effect that
+this construction operation has had on the type of the function. The type is now reported
+as \"a -> [b] -> c\", since the addition of the constructor pattern restricts the type of
+the second argument to be a list type.")
+(mouse-sequence)
+(change-view (shot4.gif type1.gif))
+(wait)
+
+(change-view (shot4.gif shot5.gif))
+(change-comment
+"We complete the first pattern equation by picking up another nil list expression ...")
+(mouse-sequence)
+(change-cursor grab)
+(wait)
+
+(change-comment
+"... and dropping it onto the remaining placeholder.")
+(mouse-sequence)
+(change-cursor normal)
+(change-view (shot4.gif shot6.gif))
+(wait)
+
+(change-comment
+"If we look at the type of type function now, we find that it is \"a -> [b] -> [e]\"
+since we now know that it must return a list type.")
+(mouse-sequence)
+(change-view (shot4.gif type2.gif))
+(wait)
+
+(change-view (shot4.gif shot6.gif))
+(change-comment
+"We need to add the second pattern equation to our definition, the one corresponding to
+the Haskell fragment:
+
+    myMap f (x:xs) = (f x) : (myMap f xs)")
+(wait)
+
+(change-comment
+"We RIGHT-CLICK on the PATTERN node an bring up the NODE CONTROL PANEL.  The node
+control panel contains the less frequently used editing controls for syntax nodes.")
+(mouse-sequence)
+(change-view (shot4.gif shot6.gif shot7.gif))
+(wait)
+
+(change-comment
+"In this case we want to use the \"add pattern after\" control to introduce the second
+pattern equation")
+(mouse-sequence)
+(change-view (shot4.gif shot6.gif shot7.gif patRqEmpty.gif))
+(wait)
+
+(change-comment
+"This pattern will have two arguments like the last; we'll give them the same names.")
+(change-view (shot4.gif shot6.gif shot7.gif patRqFull.gif))
+(wait)
+
+(change-comment
+"Clicking the OK button adds the new equation to the pattern set.")
+(mouse-sequence)
+(change-view (shot4.gif oneOfTwo.gif))
+(wait)
+
+(change-comment
+"Contrary to apperences, the new equation is present, its just not showing.  Clicking on
+the right-pointing arrow on the PATTERN causes the next pattern to appear.")
+(mouse-sequence)
+(change-view (shot4.gif shot8.gif))
+(wait)
+
+(change-comment
+"On the left of this equation we want a constructor pattern that will match a non-empty
+list.  We grab a \"Cons\" list constructor function from the pallet ...")
+(mouse-sequence)
+(change-cursor grab)
+(wait)
+
+(change-comment
+"... and drop it onto the \"xs\" pattern.  The list constructor pattern replaces the
+variable pattern, and default names are supplied for the new variable patterns.")
+(mouse-sequence)
+(change-cursor normal)
+(change-view (shot4.gif shot9.gif))
+(wait)
+
+(change-comment
+"In this case the myMap function returns a list, so we pick up another \"Cons\"
+expression.")
+(mouse-sequence)
+(change-cursor grab)
+(wait)
+
+(change-comment
+"We drop it onto the equation body placeholder.")
+(mouse-sequence)
+(change-cursor normal)
+(change-view (shot4.gif shot10.gif))
+(wait)
+
+(change-comment
+"The next task is to build the application of the \"f\" higher-order function argument to
+the head of the list \"x\".  Up until this point we have assumed that when we grab a
+function value (such as the \"Cons\" constructor), we actually get an application
+expression, where the function is applied to unspecified (ie. placeholder) arguments.")
+(wait)
+
+(change-comment
+"We want to build an application of the \"f\" function.  Now we saw previously that until
+now the VFPE knows nothing special about the type of myMap's first argument - in
+particular it doesn't know that it is a function type.  So if we were to grab it, we
+wouldn't grab the application expression that we want.")
+(wait)
+
+(change-comment
+"So what we do instead is explicitly construct the application.  We click on the APPLY
+button on the pallet (the right-pointing arrow).  This pops up a requester wanting to know
+how many arguments to apply the function to.")
+(mouse-sequence)
+(change-view (shot4.gif shot10.gif aritySel.gif))
+(wait)
+
+(change-comment
+"We're only applying \"f\" to one argument, so we click APPLY-1.")
+(mouse-sequence)
+(change-cursor grab)
+(change-view (shot4.gif shot10.gif))
+(wait)
+
+(change-comment
+"We drop this application expression onto the left-hand placeholder.")
+(mouse-sequence)
+(change-cursor normal)
+(change-view (shot4.gif shot11.gif))
+(wait)
+
+(change-comment
+"Now we can put the \"f\" in.  We click on the \"f\" binding node to grab a variable ...")
+(mouse-sequence)
+(change-cursor grab)
+(wait)
+
+(change-comment
+"... and drop it onto the left-most placeholder.")
+(mouse-sequence)
+(change-cursor normal)
+(change-view (shot4.gif shot11.5.gif))
+(wait)
+
+(change-comment
+"Once again, take a look at the currently inferred type of the myMap function.  It is now
+\"(e -> d) -> [c] -> [d]\" .  We now know that the first argument to myMap is a function
+of one argument, and that that function returns the type of items in the list returned by
+myMap.")
+(mouse-sequence)
+(change-view (shot4.gif type3.gif))
+(wait)
+
+(change-view (shot4.gif shot11.5.gif))
+(change-comment
+"Next we put in the \"x\" from the head of the input list.")
+(mouse-sequence)
+(change-cursor grab)
+(wait)
+
+(mouse-sequence)
+(change-cursor normal)
+(change-view (shot4.gif shot12.gif))
+(wait)
+
+(change-comment
+"At this point the last piece of the type puzzle has fallen into place.  Looking at the
+type of myMap, we find that the expression that we have built must have type
+\"(e -> d) -> [e] -> [d]\" , which is in fact the type of the map-over-lists function.")
+(mouse-sequence)
+(change-view (shot4.gif type4.gif))
+(wait)
+
+(change-view (shot4.gif shot12.gif))
+(change-comment
+"That's the head of the list that myMap returns done.  Now for the tail.  This is the
+recursive part.  Can you guess how we introduce a recursive function call into a
+definition ?")
+(wait)
+
+(mouse-sequence)
+(change-cursor grab)
+(change-comment
+"Recursive function applications are built in exactly the same way as any other
+expression.  We grab an application of myMap by clicking on the binding ...")
+(wait)
+
+(change-comment
+"... and drop it into place.")
+(mouse-sequence)
+(change-cursor normal)
+(change-view (shot4.gif shot13.gif))
+(wait)
+
+(change-comment
+"Now we want to fill in the arguments to the recursive call.  At this point the normally
+useful editor behaviour of grabbing function applications actually gets in our way.  If we
+were now to click on the the \"f\" binding, we would get an application of \"f\" rather
+than a reference to the bare function value.")
+(wait)
+
+(change-comment
+"We can temporarily disable the function-grabbing behaviour by clicking the APPLY
+FUNCTIONS checkbox at the top of the pallet.")
+(mouse-sequence)
+(change-view (shot14.gif shot13.gif))
+(wait)
+
+(change-comment
+"Now we can fill in the \"f\" argument.")
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-cursor normal)
+(change-view (shot14.gif shot15.gif))
+(wait)
+
+(change-comment
+"We re-enable the function-grabbing behaviour, and fill in the last placeholder with an
+\"xs\" variable.")
+(mouse-sequence)
+(change-view (shot16.gif shot15.gif))
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-cursor normal)
+(change-view (shot16.gif shot17.gif))
+(wait)
+
+(change-comment
+"Our definition of the map-over-lists function is now complete.  There is one more thing
+we could do to tidy up our program.  We click on the APPLY (arrow) node to bring up its
+control panel.")
+(mouse-sequence)
+(change-view (shot16.gif shot17.gif appControlUnchecked.gif))
+(wait)
+
+(change-comment
+"We can make our application of the function argument \"f\" look like all the other
+applications by hiding the explicit apply node.  We click in the checkbox to do this.")
+(mouse-sequence)
+(change-view (shot16.gif shot19.gif))
+(wait)
+
+(change-comment
+"Now we don't want all that work going to waste, so let's save our program.  We can close
+the myMap definition window (don't worry, the definition is still there) by using the
+window manager close control.")
+(mouse-sequence)
+(change-view (shot16.gif))
+(wait)
+
+(change-comment
+"We click on the LET node to select it, and then on the COPY button on the information
+panel at the top of the pallet.")
+(mouse-sequence)
+(change-view (shot20.gif))
+(mouse-sequence)
+(change-cursor grab)
+(wait)
+
+(change-comment
+"We have now grabbed a copy of the let expression, complete with definition of the myMap
+function.  We drop it onto the DISK icon on the pallet to save the expression.")
+(mouse-sequence)
+(change-cursor normal)
+(change-view (shot20.gif save.gif))
+(wait)
+
+(change-comment
+"We enter the name of the program (we tend to use a \".sfe\" file extension for
+\"serialised functional expression\"). and press OK to save.")
+(mouse-sequence)
+(change-view (shot20.gif))
+(wait)
+
+(change-comment
+"That concludes this demonstration.")
+(wait)
+
+)

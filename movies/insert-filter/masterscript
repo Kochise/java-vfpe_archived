@@ -1,0 +1,156 @@
+(
+"
+VFPE thesis demo movie script.
+Editor example: inserting filter.
+"
+
+(checkpoint)
+(change-comment
+"In this example we show how a function application can be inserted
+into the interior of an existing expression.  This has the effect
+of composing a new function with a sub-expression of the existing
+expression.  This sort of edit occurs commonly in the top-down 
+programming style (when functionality is being added to a skeletal
+function definition), or when adding functionality during 
+maintainance, or when correcting bugs.") 
+(change-view (shot0.gif))
+(wait)
+
+(change-comment
+"For this example we will pretend that we start with a visual
+version of the expression:
+
+    let
+	    sort zs = ...
+		f ws = ...
+	in \xs ys->(f xs) ++ (f ys)
+
+) (wait)
+
+(change-comment
+"We assume that we want to modify the expression so that the
+result of list append operation is sorted, ie:
+
+    let
+	    sort zs = ...
+		f ws = ...
+	in \xs ys->sort ((f xs) ++ (f ys))
+
+) (wait)
+
+(change-comment
+"In the case of the textual program the edit would be accomplished 
+by simply poking the cursor into the right place, adding the 
+missing function invocation, adding matching parentheses, and 
+invoking the compiler to check the result."
+) (wait)
+
+(change-comment
+"During such a textual edit, the program would be in a series of
+inconsistent states, with nonexistent half-formed identifiers and
+mismatch parentheses.  The equivalent VFPE program cannot be
+manipulated in the same way.  We will show a sequence of editing
+operations that completes the edit with syntactically correct
+intermediate states."
+) (wait)
+
+(change-comment
+"In order to insert the required 'sort' call, we need to expose 
+a placeholder node in the right location.  This involves 
+temporarily re-locating the expression that will be wrapped by 
+the new call.
+
+We create a temporary 'holder' LET expression that will store
+the re-located expression."
+) (wait)
+
+(change-comment
+"This is done by making a new LET expression and dropping it onto
+a suitable target location.  This location can be anywhere the
+re-locating expression's variables remain in scope.  The node just
+above the edit point is usually handy for this."
+) (wait)
+
+(mouse-sequence)
+(chanage-cursor grab)
+(mouse-sequence)
+(change-view (shot1.gif))
+(change-cursor normal)
+(wait)
+
+
+(change-comment
+"Note that if there is pre-existing LET expression in a convienient
+location then it can be used instead of introducing a new one.  In
+this example, the LET containing the 'sort' definition could have
+been used."
+) (wait)
+
+(change-comment
+"We create a temporary binding for the re-locating expression, cut
+the expression from its position, and drop into in the new binding
+body location."
+) (wait)
+
+(mouse-sequence)
+(change-view (shot2.gif))
+(mouse-sequence)
+(change-view (shot3.gif))
+(mouse-sequence)
+(change-view (shot4.gif))
+(mouse-sequence)
+(change-view (shot5.gif))
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot6.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment
+"The sort invocation can then be made and dropped onto the
+newly-exposed PLACEHOLDER."
+) (wait)
+
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot7.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment
+"The original expression can then be moved back underneith the new
+invocation."
+) (wait)
+
+(mouse-sequence)
+(change-view (shot8.gif))
+(mouse-sequence)
+(change-view (shot9.gif))
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot10.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment
+"The redundant Let expression can then be removed (by selecting
+it, removing the tmp binding, and reducing it)."
+) (wait)
+
+(mouse-sequence)
+(change-view (shot10.gif shotL0.gif))
+(mouse-sequence)
+(change-view (shot10.gif shotL1.gif))
+(mouse-sequence)
+(change-view (shot10.gif shotL2.gif))
+(mouse-sequence)
+(change-view (shot14.gif))
+(mouse-sequence)
+(change-view (shot15.gif))
+
+(change-comment
+"That concludes the tree-interior editing example."
+) (wait)
+
+)

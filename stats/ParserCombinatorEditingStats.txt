@@ -1,0 +1,101 @@
+statistics categories
+statistics category attach = 2
+statistics category create = 2
+statistics category grow = 1
+statistics category copy = 1
+statistics operations
+statistics operation grow-let = 1
+statistics operation copy-value = 1
+statistics operation create-let = 2
+statistics operation attach-value = 2
+statistics variants
+statistics variant grow-let-value = 1
+--
+statistics categories
+statistics category rename = 6
+statistics category attach = 67
+statistics category shrink = 3
+statistics category create = 65
+statistics category detach = 11
+statistics category grow = 6
+statistics category copy = 6
+statistics operations
+statistics operation rename-binding = 6
+statistics operation create-lambda = 1
+statistics operation create-if = 1
+statistics operation attach-value = 63
+statistics operation create-var = 49
+statistics operation grow-let = 5
+statistics operation shrink-let = 3
+statistics operation create-let = 1
+statistics operation attach-binding = 4
+statistics operation copy-value = 6
+statistics operation create-apply = 6
+statistics operation create-literal = 6
+statistics operation grow-pattern = 1
+statistics operation create-load = 1
+statistics operation detach-value = 11
+statistics variants
+statistics variant create-var-user = 23
+statistics variant grow-let-function = 1
+statistics variant grow-let-value = 4
+statistics variant create-var-apply = 18
+statistics variant shrink-let-safe = 3
+statistics variant create-var-function = 31
+statistics variant create-var-prim = 26
+--
+statistics categories
+statistics category rename = 17
+statistics category attach = 139
+statistics category create = 139
+statistics category detach = 16
+statistics category grow = 11
+statistics category copy = 15
+statistics operations
+statistics operation rename-binding = 17
+statistics operation create-lambda = 5
+statistics operation attach-value = 127
+statistics operation create-if = 1
+statistics operation create-var = 105
+statistics operation grow-let = 9
+statistics operation create-let = 1
+statistics operation attach-binding = 11
+statistics operation create-apply = 12
+statistics operation copy-value = 15
+statistics operation attach-empty-let = 1
+statistics operation detach-value = 16
+statistics operation create-literal = 14
+statistics operation grow-pattern = 2
+statistics operation create-load = 1
+statistics variants
+statistics variant create-var-user = 60
+statistics variant grow-let-function = 1
+statistics variant grow-let-value = 8
+statistics variant create-var-apply = 41
+statistics variant create-var-function = 64
+statistics variant create-var-prim = 45
+--
+statistics categories
+statistics category rename = 2
+statistics category attach = 31
+statistics category create = 32
+statistics category detach = 6
+statistics category grow = 2
+statistics category copy = 4
+statistics operations
+statistics operation rename-binding = 2
+statistics operation create-lambda = 2
+statistics operation attach-value = 31
+statistics operation create-var = 21
+statistics operation grow-let = 2
+statistics operation create-apply = 3
+statistics operation copy-value = 4
+statistics operation create-literal = 5
+statistics operation create-load = 1
+statistics operation detach-value = 6
+statistics variants
+statistics variant create-var-user = 9
+statistics variant grow-let-value = 2
+statistics variant create-var-apply = 7
+statistics variant create-var-function = 14
+statistics variant create-var-prim = 12

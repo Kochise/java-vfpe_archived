@@ -1,0 +1,133 @@
+<title>VFPE Tutorial</title>
+<body>
+<h2>Tutorial 2: Interpreter</h2>
+
+<h3>Strict vs. Lazy Evaluation</h3>
+
+This tutorial demonstrates the VPFE interpreter in action.  We will
+use two example expressions.  One demonstrates the interpreter
+in normal-order reduction mode (NOR) and applicative-order mode (AOR).
+In Haskell, this example expression could be written:
+<pre>
+        let
+            bottom = bottom
+            f x y = y*y
+        in f bottom 3
+</pre>
+<br>
+The other expression demonstrates the interpreter's strict vs. lazy
+constructor modes:
+<pre>
+        take 2 (repeat 42)
+</pre>
+where "take" and "repeat" are standard list-processing functions from
+the Haskell prelude.
+<p>
+
+<ul>
+
+<li>
+Once the editor has been started, load the first test expression.  Click
+on the "load" button on the pallet (the folder icon), this will bring up
+a file-selection dialog.  Find the VFPE directory and the "examples" folder.
+Open the tute2a.sfe file.  This will grab load and "grab" the expression.
+Drop the expression into the main panel placeholder.  Click on the
+<b>Let</b> node to select it.
+<br>
+<p><center>
+<img src="start.gif"><br>
+Example expression 1.
+</center><br>
+
+<li>
+Open up the evaluation control panel (by clicking on the "eval controls"
+button on the "info" control panel on the right).  Move the panel out
+of the way so that the main expression is visible.
+<br>
+<p><center>
+<img src="evalcontrol.gif"><br>
+Thread control panel.
+</center><br>
+<p>
+
+<li>
+Now click on the "reduce" button on the info control panel on the right
+(the reduce button is the single green arrow) a couple of times.
+You should see the main expression change to reflect the new state of the
+expression.  In this case, the definition of the "f" function has been
+expanded.
+<br>
+<p><center>
+<img src="2reductions.gif"><br>
+Expression after first reduction.
+</center><br>
+
+<li>
+Continue clicking the "Reduce" button, and watch the expression evaluate
+to its normal form (which should take 9 reductions).  Notice that
+with normal-order reduction, the "bottom" argument is never evaluated.
+Also notice that in the evalution control panel, a count of the number of
+reductions is kept.
+<br>
+<p><center>
+<img src="finished.gif"><br>
+Normal form of example expression.
+</center><br>
+
+<li>
+We need to reset the expression back to its initial form to perform
+the second demonstration.  Select the "9" node, click the "cut" button on
+the info control panel, and drop the reduced expression into the "delete
+expression" sink on the pallet (the red cross).  Repeat the first step of
+the tutorial (loading the "test2a.sfe" expression).
+<p>
+On the evaluation control panel, change the reduction order to "AOR".  Also,
+click the "Reset" button to zero the counter.  Select the <b>Let</b> node and
+start reducing the expression. This time, the interpreter reaches a point
+where it attempts to reduce the "bottom" argument. It continually replaces
+the "bottom" variable with its definition (another "bottom" variable),
+which makes no progress.
+<p>
+<hr>
+
+<li>
+We'll now move onto the second example.  Cut and delete the previous expression,
+and load the expression from file "tute2b.sfe".
+<br>
+<p><center>
+<img src="startB.gif"><br>
+Second example expression.
+</center><br>
+
+<li>
+Reduce this expression.  If you get bored of clicking the "reduce" button,
+click the "evaluate" button (the double green arrow) which will continually reduce
+the expression until it is in normal form.
+<p>
+When the interpreter is in "lazy constructors" mode, evaluation stops when the
+expression is in "Weak-Head Normal Form".  The root of the evaluated expression
+is a <b>Cons</b> data function, so the evaluation has stopped here.  If you wish,
+you can continue to evaluate parts of the expression.
+<br>
+<p><center>
+<img src="Bnormal.gif"><br>
+Second example expression in Weak-Head Normal Form.
+</center><br>
+
+<li>
+Reload the second example expression.  On the evaluation control panel,
+change the reduction mode to "strict constructors".  Now begin to evaluate the
+expression by clicking the "reduce" button.  In "strict constructor" mode,
+evaluation does not stop at the application of a constructor funciton.  With
+repeated clicking, you will see the inifinite list argument (the
+<tt>(repeat 42)</tt> part) grow longer and longer.
+<br>
+<p><center>
+<img src="longlist.gif"><br>
+Second example expression on its way to evaluating an infinitely long list.
+</center><br>
+</ul>
+
+<center>
+<a href="../index.html">contents</a>
+</center>

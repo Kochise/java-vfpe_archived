@@ -1,0 +1,358 @@
+(
+"VFPE demonstration script showing construction of map function.
+(c) J Kyle Kelso 1999"
+(change-comment "This demonstration shows the construction of a higher-order recursive function with the
+VFPE. During the demonstraction we will show how the VFPE gradually infers the type of the
+function while it is constructed.")
+(change-view (shot0.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "In this demonstration we will build the map-over-lists function. In Haskell, we can write
+this function with two pattern-matching equations:
+
+    myMap f [] = []
+    myMap f (x:xs) = (f x) : (myMap f xs)
+
+")
+(wait)
+
+(change-comment "The demonstration will also show how user-defined functions are declared and defined. In
+order to introduce a new function, we need to create a binding scope in which the function
+will be defined.")
+(wait)
+
+(change-comment "We click on the LET pallet button to grab a new empty local definition scope. In order to
+reduce the size of this demonstration, changes in the node information panel at the top of
+the pallet will not be shown, although cursor changes will be.")
+(mouse-sequence m 67 173 m 67 179 m 77 191 m 87 203 m 101 219 m 115 229 m 131 245 m 139 257 m 147 267 m 149 279 m 155 289 m 161 297 m 169 307 m 181 321 m 193 333 m 193 335 m 195 343 m 197 345 m 199 346 m 200 347 m 202 348 m 204 348 m 205 348 m 205 347 c 205 347 m 204 347 m 204 346)
+(change-cursor grab)
+(wait)
+
+(change-comment "The new LET expression is dropped onto the main program placeholder. Each LET expression
+consists of a set of (possibly mutually recursive) definitions, and a main value.")
+(mouse-sequence m 206 341 m 198 340 m 186 332 m 174 316 m 158 298 m 144 282 m 134 270 m 128 258 m 120 244 m 110 232 m 104 222 m 102 210 m 94 196 m 84 180 m 74 164 m 64 148 m 58 136 m 56 128 m 50 120 m 42 108 m 34 100 m 33 99 m 32 98 m 33 98 m 33 98 c 33 98)
+(change-cursor normal)
+(change-view (shot1.gif))
+(wait)
+
+(change-comment "To create a new definition, we press the \"plus\" button on the LET node. This will pop
+up a dialog which prompts for the name of the definition.")
+(mouse-sequence m 33 98 m 33 97 m 34 96 m 35 95 m 36 94 m 37 94 m 38 93 m 40 92 m 41 92 m 42 91 m 44 91 m 46 91 m 47 91 m 48 91 m 50 91 c 50 91)
+(change-view (shot1.gif nameRqEmpty.gif))
+(wait)
+
+(change-comment "We type in the name of our new function, \"myMap\". We can also specify the number of
+arguments to the function (by typing in argument names), and whether or not a
+pattern-matching definition should be created. These details do not have to be provided at
+this point (they can be specified later), but it is convienent to do so.")
+(change-view (shot1.gif nameRqFull.gif))
+(wait)
+
+(change-comment "Clicking OK on the dialog creates the new definition, which is shown as a label on the
+LET node.")
+(mouse-sequence m 52 91 m 54 91 m 66 91 m 86 91 m 106 91 m 132 91 m 162 92 m 194 94 m 222 95 m 246 96 m 264 98 m 286 99 m 308 101 m 318 101 m 326 102 m 334 102 m 344 102 m 356 103 m 368 103 m 382 104 m 396 106 m 404 108 m 414 110 m 430 112 m 436 112 m 437 112 m 437 111 m 437 110 m 437 109 m 437 108 c 437 108 m 436 108)
+(change-view (shot2.gif))
+(wait)
+
+(change-comment "Our new definition has an empty body containing placeholders. To define the function, we
+need to construct its body. We RIGHT-CLICK (or CTRL-CLICK) on the name of the definition
+on the LET node to bring up a window showing the body of the definition.")
+(mouse-sequence m 451 102 m 435 102 m 417 102 m 401 102 m 377 102 m 349 102 m 327 102 m 303 102 m 277 100 m 253 100 m 235 99 m 219 98 m 201 98 m 185 97 m 167 95 m 155 94 m 147 94 m 139 94 m 133 94 m 125 94 m 119 94 m 109 94 m 97 95 m 89 95 m 81 96 m 71 97 m 63 98 m 55 98 m 49 98 m 47 99 m 47 100 m 46 100 m 46 101 m 47 101 m 46 102 m 44 103 m 45 103 c 45 103)
+(change-view (shot2.gif shot3.gif))
+(wait)
+
+(change-comment "The new window is a BINDING FRAME. It shows a local-definition binding and the expression
+that is the value of the binding. Throughout the VFPE, name bindings are shown as nodes
+with rounded ends. At the root of the binding frame is the binding node for the \"myMap\"
+definition.")
+(wait)
+
+(change-comment "Before we begin construction, let's look at the currently inferred type of our function.
+We move the cursor over the root binding node and let it linger there.")
+(mouse-sequence m 59 107 m 79 99 m 115 87 m 147 81 m 177 71 m 201 63 m 217 55 m 237 47 m 255 41 m 273 39 m 293 33 m 311 31 m 321 30 m 327 29 m 328 29 m 340 29 m 362 29 m 376 30 m 390 30 m 404 32 m 414 32 m 422 32 m 430 33 m 440 34 m 446 34 m 447 34 m 448 34 m 449 34 m 450 34 m 451 34 m 450 34 m 449 34)
+(change-view (shot2.gif type0.gif))
+(wait)
+
+(change-comment "A pop-up \"tool-tip\" window appears, showing the category and type of the node.
+Currently the type of the binding is \"a -> b -> c\", showing that the only information
+that the VPFE has about the binding is that it is a function of two arguments of generic
+type.")
+(wait)
+
+(change-comment "OK, let's get down to business. Let's build the first of the \"myMap\" equations. In
+Haskell, this would be:
+
+    myMap f [] = []")
+(wait)
+
+(change-view (shot2.gif shot3.gif))
+(change-comment "We need to put in the empty-list constructors (the \"[]\"s), both for the pattern on the
+left of the equation and the value on the right. We select the DATA primitive function
+group from the pallet, which contains the constructor functions for the list and tuple
+data types and so forth.")
+(mouse-sequence m 445 34 m 446 34 m 445 34 m 437 40 m 425 48 m 413 58 m 397 76 m 377 100 m 359 122 m 343 146 m 331 166 m 317 188 m 301 214 m 289 240 m 275 258 m 265 286 m 257 314 m 255 340 m 253 362 m 245 382 m 244 406 m 244 430 m 242 442 m 241 444 m 242 445 m 244 447 m 246 453 m 247 455 m 249 463 m 249 469 m 250 471 m 251 477 m 253 478 m 255 480 m 257 481 m 259 481 m 260 481 c 260 481)
+(change-view (shot4.gif shot3.gif))
+(wait)
+
+(change-comment "We grab an empty-list constructor function (\"Nil\") by clicking on the NIL pallet
+button.")
+(mouse-sequence m 260 479 m 266 471 m 267 469 m 269 463 m 271 455 m 279 445 m 293 433 m 305 421 m 313 413 m 325 403 m 333 393 m 335 385 m 341 375 m 347 367 m 353 359 m 354 353 m 355 347 m 356 339 m 358 329 m 360 327 m 360 326 m 360 325 m 360 324 m 360 322 m 360 320 m 360 319 m 360 318 m 360 317 m 359 316 m 359 315 c 359 315)
+(change-cursor grab)
+(wait)
+
+(change-comment "We drop the nil list expression onto the \"xs\" binding node to build the constructor
+pattern.")
+(mouse-sequence m 360 309 m 368 299 m 376 293 m 388 275 m 400 259 m 402 245 m 404 231 m 406 219 m 407 207 m 408 195 m 410 187 m 412 179 m 414 169 m 415 159 m 415 153 m 415 145 m 416 137 m 417 129 m 418 123 m 419 121 m 425 113 m 426 111 m 432 109 m 434 107 m 435 106 m 435 105 m 436 104 m 437 102 m 438 100 m 438 99 m 438 98 m 439 97 m 439 96 m 440 96 c 440 96 m 439 96 m 438 96 m 436 96 m 435 96 m 434 96 m 433 96 m 432 96 m 431 96)
+(change-cursor normal)
+(change-view (shot4.gif shot5.gif))
+(wait)
+
+(change-comment "If we again let the cursor linger over the root binding node, we can see the effect that
+this construction operation has had on the type of the function. The type is now reported
+as \"a -> [b] -> c\", since the addition of the constructor pattern restricts the type of
+the second argument to be a list type.")
+(mouse-sequence m 442 101 m 442 95 m 444 89 m 446 81 m 446 75 m 447 69 m 448 63 m 449 57 m 450 51 m 450 49 m 451 47 m 452 45 m 452 44 m 452 43 m 453 42)
+(change-view (shot4.gif type1.gif))
+(wait)
+
+(change-view (shot4.gif shot5.gif))
+(change-comment "We complete the first pattern equation by picking up another nil list expression ...")
+(mouse-sequence m 450 42 m 444 43 m 438 49 m 428 57 m 414 69 m 402 83 m 390 101 m 378 119 m 364 135 m 356 149 m 348 159 m 338 171 m 336 183 m 335 195 m 335 209 m 335 221 m 336 235 m 337 247 m 338 255 m 338 261 m 338 267 m 338 273 m 338 281 m 338 287 m 338 293 m 338 294 m 339 296 m 339 302 m 340 304 m 340 305 m 340 306 m 340 307 m 340 308 m 340 309 c 340 309)
+(change-cursor grab)
+(wait)
+
+(change-comment "... and dropping it onto the remaining placeholder.")
+(mouse-sequence m 342 303 m 354 295 m 366 281 m 376 271 m 386 261 m 398 247 m 408 233 m 420 221 m 428 209 m 436 197 m 438 189 m 444 179 m 446 173 m 452 165 m 454 157 m 455 147 m 461 137 m 463 129 m 469 127 m 469 125 m 470 119 m 470 113 m 471 107 m 473 101 m 474 100 m 474 99 m 475 98 m 475 97 m 476 96 m 476 95 m 477 95 m 477 96 c 477 96 m 477 95)
+(change-cursor normal)
+(change-view (shot4.gif shot6.gif))
+(wait)
+
+(change-comment "If we look at the type of type function now, we find that it is \"a -> [b] -> [e]\"
+since we now know that it must return a list type.")
+(mouse-sequence m 473 94 m 472 93 m 472 91 m 471 83 m 471 77 m 471 71 m 471 65 m 471 59 m 471 58 m 471 52 m 472 44 m 472 42 m 472 36 m 472 35 m 472 34 m 472 32 m 471 32 m 470 32 m 469 33)
+(change-view (shot4.gif type2.gif))
+(wait)
+
+(change-view (shot4.gif shot6.gif))
+(change-comment "We need to add the second pattern equation to our definition, the one corresponding to
+the Haskell fragment:
+
+    myMap f (x:xs) = (f x) : (myMap f xs)")
+(wait)
+
+(change-comment "We RIGHT-CLICK on the PATTERN node an bring up the NODE CONTROL PANEL.  The node
+control panel contains the less frequently used editing controls for syntax nodes.")
+(mouse-sequence m 465 33 m 464 33 m 463 33 m 462 33 m 460 34 m 454 36 m 452 38 m 450 39 m 450 40 m 449 41 m 448 42 m 447 43 m 447 44 m 447 45 m 446 46 m 446 47 m 446 48 m 446 49 m 446 51 m 446 52 m 446 53 m 446 54 m 446 55 m 446 56 m 446 57 m 446 59 m 446 60 m 446 61 m 446 62 c 446 62)
+(change-view (shot4.gif shot6.gif shot7.gif))
+(wait)
+
+(change-comment "In this case we want to use the \"add pattern after\" control to introduce the second
+pattern equation")
+(mouse-sequence m 445 63 m 444 63 m 444 65 m 444 66 m 444 67 m 444 69 m 444 79 m 446 89 m 448 101 m 450 113 m 451 129 m 453 145 m 461 161 m 467 177 m 469 187 m 470 197 m 476 209 m 478 223 m 480 235 m 482 249 m 490 265 m 498 279 m 499 289 m 500 297 m 501 303 m 507 311 m 509 319 m 511 329 m 511 337 m 513 345 m 514 351 m 514 352 m 515 354 m 517 360 m 518 366 m 518 368 m 519 369 m 519 375 m 521 381 m 521 383 m 522 385 m 522 387 m 522 388 m 522 389 m 522 390 m 522 392 m 523 394 c 523 394)
+(change-view (shot4.gif shot6.gif shot7.gif patRqEmpty.gif))
+(wait)
+
+(change-comment "This pattern will have two arguments like the last; we'll give them the same names.")
+(change-view (shot4.gif shot6.gif shot7.gif patRqFull.gif))
+(wait)
+
+(change-comment "Clicking the OK button adds the new equation to the pattern set.")
+(mouse-sequence m 522 395 m 516 397 m 514 403 m 508 411 m 502 421 m 492 431 m 482 443 m 474 453 m 472 463 m 466 469 m 460 477 m 454 483 m 452 489 m 451 491 m 450 492 m 448 492 m 447 494 m 445 494 m 443 495 m 442 496 m 441 497 m 439 497 m 438 498 m 437 499 m 435 500 m 433 501 m 431 502 m 430 502 m 429 503 m 428 503 m 429 503 m 429 504 c 429 504)
+(change-view (shot4.gif oneOfTwo.gif))
+(wait)
+
+(change-comment "Contrary to apperences, the new equation is present, its just not showing.  Clicking on
+the right-pointing arrow on the PATTERN causes the next pattern to appear.")
+(mouse-sequence m 431 502 m 441 500 m 451 498 m 457 497 m 467 495 m 479 493 m 489 491 m 497 489 m 507 487 m 515 485 m 516 483 m 517 481 m 517 473 m 518 465 m 519 455 m 519 445 m 519 433 m 518 419 m 517 401 m 515 381 m 513 367 m 512 361 m 512 360 m 512 359 m 512 358 m 513 357 m 512 357 m 520 351 m 532 337 m 532 311 m 532 283 m 532 253 m 532 217 m 532 185 m 533 157 m 535 131 m 533 109 m 532 97 m 532 87 m 532 79 m 532 71 m 531 65 m 531 63 m 531 62 m 529 61 m 529 60 m 528 60 m 526 60 m 520 60 m 519 60 m 518 60 m 516 60 m 515 60 m 514 61 m 514 62 m 515 62 m 515 63 c 515 63 m 515 62 m 515 61 m 515 60 m 514 60 m 514 59 m 513 59)
+(change-view (shot4.gif shot8.gif))
+(wait)
+
+(change-comment "On the left of this equation we want a constructor pattern that will match a non-empty
+list.  We grab a \"Cons\" list constructor function from the pallet ...")
+(mouse-sequence m 512 59 m 506 59 m 492 61 m 474 75 m 456 95 m 436 113 m 420 131 m 408 149 m 394 165 m 380 177 m 372 191 m 366 207 m 358 223 m 352 239 m 346 249 m 338 261 m 336 271 m 335 279 m 336 287 m 336 293 m 335 299 m 335 305 m 334 311 m 334 319 m 334 325 m 334 327 m 335 327 m 335 328 m 335 329 m 335 330 m 335 331 m 336 331 c 336 331)
+(change-cursor grab)
+(wait)
+
+(change-comment "... and drop it onto the \"xs\" pattern.  The list constructor pattern replaces the
+variable pattern, and default names are supplied for the new variable patterns.")
+(mouse-sequence m 336 330 m 337 320 m 345 306 m 353 294 m 355 278 m 357 262 m 357 248 m 358 230 m 364 218 m 366 204 m 368 196 m 370 184 m 378 170 m 384 158 m 390 150 m 398 144 m 406 138 m 414 136 m 416 134 m 418 132 m 420 130 m 422 128 m 423 122 m 424 121 m 425 119 m 426 117 m 428 115 m 429 114 m 430 113 m 431 111 m 432 109 m 433 108 m 434 106 m 435 105 m 436 104 m 438 103 m 438 102 m 438 101 m 438 99 m 439 98 m 439 97 m 440 96 m 440 95 m 441 94 m 442 94 c 442 94)
+(change-cursor normal)
+(change-view (shot4.gif shot9.gif))
+(wait)
+
+(change-comment "In this case the myMap function returns a list, so we pick up another \"Cons\"
+expression.")
+(mouse-sequence m 435 93 m 429 93 m 427 95 m 425 101 m 417 111 m 405 131 m 391 151 m 381 169 m 373 183 m 367 197 m 365 209 m 359 221 m 351 233 m 341 249 m 335 265 m 329 279 m 323 291 m 321 301 m 319 311 m 318 321 m 318 331 m 318 337 m 318 338 m 318 339 m 319 339 m 320 339 m 320 338 c 320 338 m 319 338 m 319 337)
+(change-cursor grab)
+(wait)
+
+(change-comment "We drop it onto the equation body placeholder.")
+(mouse-sequence m 331 324 m 347 308 m 357 296 m 371 282 m 385 266 m 403 250 m 421 232 m 435 216 m 451 200 m 461 184 m 475 168 m 487 154 m 499 144 m 505 134 m 506 126 m 507 120 m 509 120 m 510 121 m 510 120 m 510 118 m 510 117 m 510 115 m 509 114 m 509 113 m 508 112 m 508 111 m 508 110 m 507 109 m 507 108 m 506 107 m 506 106 m 506 105 m 505 104 m 504 103 m 503 101 m 502 100 m 502 99 m 502 98 m 502 97 m 501 96 m 501 95 m 500 94 m 501 94 m 501 93 m 500 93 m 499 92 c 499 92)
+(change-cursor normal)
+(change-view (shot4.gif shot10.gif))
+(wait)
+
+(change-comment "The next task is to build the application of the \"f\" higher-order function argument to
+the head of the list \"x\".  Up until this point we have assumed that when we grab a
+function value (such as the \"Cons\" constructor), we actually get an application
+expression, where the function is applied to unspecified (ie. placeholder) arguments.")
+(wait)
+
+(change-comment "We want to build an application of the \"f\" function.  Now we saw previously that until
+now the VFPE knows nothing special about the type of myMap's first argument - in
+particular it doesn't know that it is a function type.  So if we were to grab it, we
+wouldn't grab the application expression that we want.")
+(wait)
+
+(change-comment "So what we do instead is explicitly construct the application.  We click on the APPLY
+button on the pallet (the right-pointing arrow).  This pops up a requester wanting to know
+how many arguments to apply the function to.")
+(mouse-sequence m 484 93 m 472 99 m 454 111 m 438 121 m 426 131 m 414 141 m 402 153 m 388 165 m 378 175 m 370 187 m 358 199 m 346 215 m 336 231 m 324 247 m 312 263 m 300 275 m 288 283 m 276 291 m 264 299 m 252 311 m 240 325 m 228 333 m 218 339 m 210 345 m 202 351 m 200 357 m 199 359 m 198 360 m 197 362 m 197 363 m 197 363 c 197 363)
+(change-view (shot4.gif shot10.gif aritySel.gif))
+(wait)
+
+(change-comment "We're only applying \"f\" to one argument, so we click APPLY-1.")
+(mouse-sequence m 198 363 m 199 363 m 207 361 m 225 355 m 253 345 m 281 335 m 301 327 m 317 319 m 329 311 m 341 303 m 353 301 m 361 299 m 369 297 m 375 295 m 381 294 m 387 294 m 393 294 m 399 294 m 405 294 m 407 294 m 409 294 m 409 295 m 411 296 m 417 297 m 419 298 m 420 298 m 420 299 c 420 299)
+(change-cursor grab)
+(change-view (shot4.gif shot10.gif))
+(wait)
+
+(change-comment "We drop this application expression onto the left-hand placeholder.")
+(mouse-sequence m 419 297 m 420 289 m 420 279 m 420 263 m 420 247 m 422 233 m 424 221 m 426 211 m 432 201 m 438 191 m 440 181 m 446 173 m 454 167 m 460 159 m 462 153 m 468 147 m 474 141 m 476 135 m 482 134 m 484 132 m 485 131 m 485 130 m 486 130 m 487 129 m 489 127 m 490 127 m 490 126 m 491 126 m 491 125 m 493 125 m 493 124 m 494 124 c 494 124 m 494 123 m 494 122)
+(change-cursor normal)
+(change-view (shot4.gif shot11.gif))
+(wait)
+
+(change-comment "Now we can put the \"f\" in.  We click on the \"f\" binding node to grab a variable ...")
+(mouse-sequence m 519 115 m 513 115 m 505 114 m 497 114 m 487 113 m 475 112 m 469 111 m 467 111 m 465 110 m 459 109 m 451 108 m 441 106 m 431 105 m 425 104 m 419 103 m 417 102 m 415 102 m 415 101 m 414 101 m 414 100 m 414 99 m 414 98 m 415 98 m 415 97 m 415 96 m 415 95 m 415 96 c 415 96 m 415 95)
+(change-cursor grab)
+(wait)
+
+(change-comment "... and drop it onto the left-most placeholder.")
+(mouse-sequence m 415 95 m 416 97 m 418 99 m 420 101 m 426 107 m 432 109 m 433 111 m 441 113 m 447 119 m 455 121 m 461 122 m 467 124 m 469 124 m 475 125 m 481 126 m 487 127 m 489 127 m 491 128 m 491 129 m 491 130 m 491 131 m 491 132 m 491 133 m 491 134 m 491 135 m 492 135 m 492 136 m 493 136 m 493 137 c 493 137 m 493 136 m 493 135)
+(change-cursor normal)
+(change-view (shot4.gif shot11.5.gif))
+(wait)
+
+(change-comment "Once again, take a look at the currently inferred type of the myMap function.  It is now
+\"(e -> d) -> [c] -> [d]\" .  We now know that the first argument to myMap is a function
+of one argument, and that that function returns the type of items in the list returned by
+myMap.")
+(mouse-sequence m 495 132 m 495 131 m 495 125 m 496 117 m 496 109 m 496 103 m 495 97 m 495 91 m 495 85 m 489 77 m 487 69 m 486 61 m 484 53 m 483 47 m 482 41 m 480 39 m 480 37 m 480 35 m 480 34 m 480 33 m 479 33 m 478 33 m 477 33)
+(change-view (shot4.gif type3.gif))
+(wait)
+
+(change-view (shot4.gif shot11.5.gif))
+(change-comment "Next we put in the \"x\" from the head of the input list.")
+(mouse-sequence m 479 38 m 479 39 m 478 41 m 477 43 m 476 45 m 475 47 m 473 53 m 472 55 m 471 57 m 469 63 m 467 69 m 466 71 m 465 77 m 464 79 m 462 85 m 461 87 m 461 93 m 459 95 m 458 101 m 457 103 m 455 105 m 453 107 m 451 109 m 450 110 m 449 111 m 448 111 m 447 112 m 446 113 m 445 113 m 445 114 m 443 115 m 442 117 m 441 118 m 441 119 m 441 119 c 441 119)
+(change-cursor grab)
+(wait)
+
+(mouse-sequence m 442 116 m 444 116 m 445 117 m 447 117 m 449 118 m 451 119 m 459 120 m 467 121 m 473 122 m 474 123 m 476 124 m 482 126 m 484 127 m 485 127 m 487 129 m 489 130 m 491 131 m 492 132 m 498 133 m 506 134 m 506 135 m 507 136 m 508 137 m 509 137 c 509 137)
+(change-cursor normal)
+(change-view (shot4.gif shot12.gif))
+(wait)
+
+(change-comment "At this point the last piece of the type puzzle has fallen into place.  Looking at the
+type of myMap, we find that the expression that we have built must have type
+\"(e -> d) -> [e] -> [d]\" , which is in fact the type of the map-over-lists function.")
+(mouse-sequence m 508 137 m 507 129 m 507 121 m 506 115 m 500 105 m 492 95 m 486 83 m 484 73 m 483 65 m 482 55 m 481 47 m 480 41 m 478 39 m 478 38 m 477 38)
+(change-view (shot4.gif type4.gif))
+(wait)
+
+(change-view (shot4.gif shot12.gif))
+(change-comment "That's the head of the list that myMap returns done.  Now for the tail.  This is the
+recursive part.  Can you guess how we introduce a recursive function call into a
+definition ?")
+(wait)
+
+(mouse-sequence m 477 38 c 477 38)
+(change-cursor grab)
+(change-comment "Recursive function applications are built in exactly the same way as any other
+expression.  We grab an application of myMap by clicking on the binding ...")
+(wait)
+
+(change-comment "... and drop it into place.")
+(mouse-sequence m 475 38 m 475 39 m 475 41 m 476 42 m 476 44 m 476 45 m 477 51 m 479 59 m 480 65 m 482 67 m 484 68 m 485 70 m 486 71 m 492 77 m 498 83 m 500 85 m 502 91 m 504 93 m 510 99 m 516 105 m 518 107 m 520 113 m 522 115 m 524 116 m 524 117 m 525 118 m 531 119 m 531 120 c 531 120 m 531 119)
+(change-cursor normal)
+(change-view (shot4.gif shot13.gif))
+(wait)
+
+(change-comment "Now we want to fill in the arguments to the recursive call.  At this point the normally
+useful editor behaviour of grabbing function applications actually gets in our way.  If we
+were now to click on the the \"f\" binding, we would get an application of \"f\" rather
+than a reference to the bare function value.")
+(wait)
+
+(change-comment "We can temporarily disable the function-grabbing behaviour by clicking the APPLY
+FUNCTIONS checkbox at the top of the pallet.")
+(mouse-sequence m 529 119 m 527 119 m 525 119 m 513 119 m 499 118 m 483 117 m 469 117 m 453 117 m 433 116 m 415 116 m 399 116 m 387 116 m 377 116 m 365 116 m 353 116 m 345 117 m 337 119 m 327 121 m 325 123 m 325 125 m 325 127 m 325 129 m 325 130 m 325 131 m 325 132 m 325 134 m 325 135 m 325 136 m 325 137 m 325 138 m 325 139 m 325 141 m 325 147 m 303 149 m 279 149 m 255 149 m 233 149 m 219 149 m 201 149 m 189 149 m 183 149 m 175 147 m 173 146 m 171 146 m 172 146 m 173 146 m 179 147 m 187 147 m 189 148 m 190 148 m 192 149 m 194 155 m 196 156 m 196 157 m 196 157 c 196 157)
+(change-view (shot14.gif shot13.gif))
+(wait)
+
+(change-comment "Now we can fill in the \"f\" argument.")
+(mouse-sequence m 197 156 m 203 155 m 215 147 m 235 139 m 255 133 m 277 125 m 301 115 m 327 107 m 339 106 m 349 105 m 359 99 m 365 93 m 366 92 m 372 91 m 380 89 m 386 87 m 388 86 m 390 84 m 392 84 m 394 83 m 396 83 m 402 83 m 404 83 m 405 83 m 406 84 m 407 84 m 408 85 m 409 85 m 410 85 m 411 85 m 412 86 m 413 86 m 414 86 m 415 86 m 416 86 m 417 86 c 417 86)
+(change-cursor grab)
+(mouse-sequence m 417 88 m 418 89 m 420 90 m 422 91 m 428 93 m 438 95 m 450 97 m 460 98 m 468 100 m 476 102 m 484 104 m 494 106 m 506 108 m 516 109 m 518 111 m 519 112 m 521 118 m 527 120 m 528 122 m 529 124 m 529 125 m 530 127 m 531 128 m 531 130 m 532 131 m 532 132 m 532 133 m 532 135 m 532 136 m 532 137 m 532 138 m 532 139 m 532 140 c 532 140)
+(change-cursor normal)
+(change-view (shot14.gif shot15.gif))
+(wait)
+
+(change-comment "We re-enable the function-grabbing behaviour, and fill in the last placeholder with an
+\"xs\" variable.")
+(mouse-sequence m 538 144 m 532 144 m 516 144 m 498 144 m 476 144 m 456 145 m 436 147 m 410 149 m 386 150 m 360 151 m 340 151 m 324 151 m 316 151 m 308 151 m 300 151 m 299 151 m 299 152 m 299 153 m 299 147 m 299 145 m 299 147 m 299 148 m 299 156 m 299 158 m 299 160 m 299 162 m 299 161 m 299 160 m 299 180 m 309 180 m 331 180 m 351 178 m 361 170 m 361 169 m 360 169 m 350 169 m 330 169 m 296 169 m 254 170 m 212 172 m 182 172 m 172 172 m 173 172 m 173 166 m 173 160 m 173 159 m 173 158 m 174 158 m 180 158 m 188 157 m 189 157 m 190 157 m 191 157 m 193 157 m 194 157 c 194 157)
+(change-view (shot16.gif shot15.gif))
+(mouse-sequence m 194 157 m 195 157 m 205 157 m 217 156 m 237 155 m 255 155 m 275 155 m 291 154 m 301 154 m 309 153 m 311 153 m 319 152 m 331 152 m 343 152 m 353 151 m 359 150 m 367 150 m 377 148 m 387 147 m 395 146 m 397 146 m 399 145 m 401 144 m 407 142 m 417 140 m 423 139 m 429 137 m 431 131 m 439 129 m 445 127 m 451 126 m 452 125 m 453 124 m 455 123 m 456 122 m 457 121 m 459 119 m 459 118 m 460 117 m 461 117 m 462 116 c 462 116)
+(change-cursor grab)
+(mouse-sequence m 463 117 m 469 123 m 477 129 m 483 131 m 485 132 m 485 133 m 486 133 m 487 134 m 493 136 m 501 138 m 507 139 m 509 140 m 510 141 m 511 141 m 519 141 m 521 142 m 523 142 m 525 143 m 526 143 m 527 143 m 528 143 m 534 144 m 535 144 m 536 144 m 538 144 m 544 145 m 545 145 c 545 145)
+(change-cursor normal)
+(change-view (shot16.gif shot17.gif))
+(wait)
+
+(change-comment "Our definition of the map-over-lists function is now complete.  There is one more thing
+we could do to tidy up our program.  We click on the APPLY (arrow) node to bring up its
+control panel.")
+(mouse-sequence m 544 145 m 543 145 m 542 145 m 541 145 m 535 144 m 529 142 m 527 141 m 526 140 m 525 139 m 523 139 m 521 137 m 515 136 m 514 135 m 512 134 m 511 133 m 509 132 m 508 131 m 508 130 m 508 129 m 507 128 m 506 127 m 506 126 m 506 125 m 505 124 m 504 123 m 504 122 m 504 121 c 504 121)
+(change-view (shot16.gif shot17.gif appControlUnchecked.gif))
+(wait)
+
+(change-comment "We can make our application of the function argument \"f\" look like all the other
+applications by hiding the explicit apply node.  We click in the checkbox to do this.")
+(mouse-sequence m 501 121 m 500 127 m 494 139 m 484 155 m 474 175 m 464 193 m 454 211 m 446 233 m 440 249 m 438 261 m 437 269 m 436 279 m 436 281 m 436 282 m 436 290 m 435 302 m 434 316 m 434 326 m 432 338 m 432 348 m 430 358 m 429 366 m 427 376 m 427 382 m 426 384 m 426 385 m 425 386 m 424 387 m 424 388 m 422 389 m 421 390 m 420 391 m 419 391 m 418 392 m 418 393 m 417 393 m 416 394 m 416 395 c 416 395 m 416 394)
+(change-view (shot16.gif shot19.gif))
+(wait)
+
+(change-comment "Now we don't want all that work going to waste, so let's save our program.  We can close
+the myMap definition window (don't worry, the definition is still there) by using the
+window manager close control.")
+(mouse-sequence m 417 393 m 418 387 m 426 379 m 438 367 m 454 353 m 474 335 m 492 315 m 510 297 m 526 285 m 534 275 m 536 273 m 537 271 m 543 265 m 549 255 m 559 243 m 571 227 m 583 211 m 595 193 m 607 175 m 619 157 m 631 137 m 645 119 m 655 105 m 667 91 m 673 77 m 679 67 m 681 59 m 682 51 m 683 49 m 683 47 m 683 46 m 684 44 m 685 42 m 685 36 m 687 30 m 687 22 m 689 16 m 690 14 m 691 8 m 691 6 m 692 0 m 693 0 m 693 1 m 693 2 m 693 3 c 693 3)
+(change-view (shot16.gif))
+(wait)
+
+(change-comment "We click on the LET node to select it, and then on the COPY button on the information
+panel at the top of the pallet.")
+(mouse-sequence m 700 11 m 688 11 m 666 13 m 640 21 m 604 31 m 560 45 m 512 61 m 468 75 m 428 87 m 388 97 m 352 103 m 322 103 m 292 103 m 252 101 m 224 99 m 200 93 m 178 91 m 160 85 m 150 85 m 144 85 m 136 85 m 126 85 m 114 85 m 104 85 m 102 85 m 100 85 m 98 85 m 92 85 m 86 85 m 84 85 m 83 85 m 82 85 m 76 85 m 75 85 m 74 85 m 74 86 c 74 86)
+(change-view (shot20.gif))
+(mouse-sequence m 78 86 m 84 86 m 96 86 m 106 86 m 114 86 m 124 86 m 132 86 m 146 87 m 158 89 m 170 90 m 182 91 m 192 92 m 206 94 m 224 96 m 246 104 m 260 106 m 268 107 m 270 107 m 271 107 m 277 108 m 283 108 m 284 109 m 286 109 m 287 110 m 288 110 m 289 111 m 290 111 c 290 111)
+(change-cursor grab)
+(wait)
+
+(change-comment "We have now grabbed a copy of the let expression, complete with definition of the myMap
+function.  We drop it onto the DISK icon on the pallet to save the expression.")
+(mouse-sequence m 295 119 m 294 119 m 286 120 m 274 126 m 264 134 m 254 142 m 246 152 m 238 160 m 230 170 m 222 178 m 216 186 m 214 194 m 212 200 m 211 206 m 211 207 m 211 208 m 210 209 c 210 209)
+(change-cursor normal)
+(change-view (shot20.gif save.gif))
+(wait)
+
+(change-comment "We enter the name of the program (we tend to use a \".sfe\" file extension for
+\"serialised functional expression\"). and press OK to save.")
+(mouse-sequence m 211 209 m 217 209 m 231 209 m 259 209 m 289 209 m 315 209 m 335 209 m 353 209 m 373 209 m 395 209 m 415 209 m 435 209 m 455 209 m 479 209 m 503 209 m 527 207 m 549 206 m 571 204 m 587 203 m 599 202 m 605 201 m 615 200 m 625 200 m 635 200 m 647 200 m 659 200 m 673 200 m 689 200 m 703 201 m 715 201 m 731 202 m 747 203 m 757 203 m 758 203 m 760 203 m 761 203 c 761 203)
+(change-view (shot20.gif))
+(wait)
+
+(change-comment "That concludes this demonstration.")
+(wait)
+
+
+)

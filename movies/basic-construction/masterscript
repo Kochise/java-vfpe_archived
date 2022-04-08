@@ -1,0 +1,90 @@
+(
+"
+Hand-made script for testing movie applet player.
+(c) J Kyle Kelso 1999
+"
+(checkpoint)
+(change-comment "This is shot demo showing basic editing operations.
+
+In this example we will construct the expression \"1+1\" and evaluate it.")
+(change-view (shot0.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "At the root of this expression is an application of the addition function.
+To create the addition we need the integer-math group of library functions.
+We click on the INT-MATH button.")
+(mouse-sequence)
+
+(change-view (shot1.gif))
+(wait)
+
+(change-comment "Next we \"pick up\" an addition expression by clicking on the plus button.
+Note how the cursor changes to indicate that we have now grabbed and expression,
+and how the information panel in the top right corner displays some information
+about the grabbed expression.")
+(mouse-sequence)
+
+(change-view (shot2.gif))
+(change-cursor grab)
+(wait)
+
+(change-comment "To build onto our initially empty program, we drop the grabbed expression onto
+the PLACEHOLDER in the main expression part of the editor.  The placeholder is
+replaced by the new expression: an addition function with two new placeholders
+for its arguments.
+
+Notice how the cursor changes back to its \"empty\" condition.")
+(mouse-sequence)
+
+(change-view (shot3.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "Next we need to fill in the arguments of the expression.  To create a \"1\"
+literal, we click in the literal entry area next to the LITERAL button, type
+a 1 into the area and then press the LITERAL button to grab the integer literal
+expression.")
+(mouse-sequence)
+
+(change-view (shot4.gif))
+(change-cursor grab)
+(wait)
+
+(change-comment "This literal is dropped onto one of the PLACEHOLDERS.")
+(mouse-sequence)
+
+(change-view (shot5.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "We grab another 1 literal by clicking on the LITERAL button again...")
+(mouse-sequence)
+
+(change-view (shot6.gif))
+(change-cursor grab)
+(wait)
+
+(change-comment "... and drop it onto the other placeholder.")
+(mouse-sequence)
+
+(change-view (shot7.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "We have constructed the \"1+1\" expression: now we wish to evaluate it.
+To do this we select the root of the expression by clicking on the plus
+node.  Notice how the node changes appearence to show that it has been
+selected.")
+(mouse-sequence)
+
+(change-view (shot8.gif))
+(wait)
+
+(change-comment "The expression is evaluated by clicking on the green \"evaluate\" button.")
+(mouse-sequence)
+
+(change-view (shot9.gif))
+(wait)
+
+)

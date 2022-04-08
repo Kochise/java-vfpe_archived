@@ -1,0 +1,99 @@
+<title>VFPE Manual</title>
+<h2>Expression Targets</h2>
+<p>
+Below is a table describing the effects of "dropping" various expressions
+onto drop targets.
+<p>
+<table border=1>
+
+<tr>
+<th>Grabbed expression</th>
+<th>Drop target</th>
+<th>Effect</th>
+<th>Rationale</th>
+<th>Consistency checks</th>
+</tr>
+
+<tr>
+<td align=center>any value</td>
+<td align=center>placeholder<br><img src="btm.gif"></td>
+<td>The placeholder is replaced by the grabbed expression</td>
+<td>Basic program construction.
+<td>type correctness, variable scope</td>
+</tr>
+
+<tr>
+<td align=center>constructor function, or application of constructor function.</td>
+<td align=center>variable pattern binding</td>
+<td>The variable pattern binding is replaced with a constructor
+pattern binding.  The arguments of the constructor bindings are
+variable patterns (the user is prompted for variable names).</td>
+<td>Pattern expression construction.</td>
+<td>type correctness</td>
+</tr>
+
+<tr>
+<td align=center>new let expression<br><img src="let.gif"></td>
+<td align=center>any value</td>
+<td>The value expression is replaced by a let expression.  The let
+expression has no bindings, and its body takes the value of the 
+replaced expression.  This operation does not change the value
+or type of the program.</td>
+<td>Allows easy introduction of local variables at arbitrary points
+in program.
+<td>none</td>
+</tr>
+
+<tr>
+<td align=center>new thread node<br><img src="thread.gif"></td>
+<td align=center>any value</td>
+<td>The value expression is replaced by a thread node, the body of
+which is the value expression.  This operation does not change the value
+or type of the program.</td>
+<td>Allows easy introduction of interpreter control points to arbitrary
+points in the program.
+<td>none</td>
+</tr>
+
+<tr>
+<td align=center>new pattern set expression<br><img src="patterns.gif"></td>
+<td align=center>lambda abstraction<br><img src="lambda.gif"></td>
+<td>The abstraction is replaced by a pattern set expression, with the
+abstraction becomes the first pattern in the set.  This operation does 
+not change the type of the program.</td>
+<td>Allows lambda-expressions to be converted into a pattern-set
+definition.
+<td>none</td>
+</tr>
+
+<tr>
+<td align=center>any</td>
+<td align=center>"rubbish bin" button</td>
+<td>The grabbed expression is dropped and perminently deleted.</td>
+<td>Allows deletion of subexpressions.</td>
+<td>none</td>
+</tr>
+
+<tr>
+<td align=center>any</td>
+<td align=center>expression save button</td>
+<td>The grabbed expression is saved to a file.</td>
+<td>Allows expressions and programs to persist on disk.</td>
+<td>expression must contain no free variables.</td>
+</tr>
+
+<tr>
+<td align=center>let expression<br><img src="let.gif"></td>
+<td align=center>"write Haskell" button</td>
+<td>A Haskell source fragment generated from grabbed expression is 
+saved to a file.</td>
+<td>Allows expressions to be evaluated or further processed by
+existing Haskell system.</td>
+<td>expression must contain no free variables.</td>
+</tr>
+
+</table>
+<p>
+<center>
+<a href="index.html">contents</a>
+</center>

@@ -1,0 +1,343 @@
+(
+"VFPE demonstration script showing generalisation of function.
+(c) J Kyle Kelso 2001"
+(change-comment "In this example we show a function being generalised.
+The sorting implementation pictured here opperates on lists 
+of items for which the '<=' function is defined.  Say we 
+wish to generalise the sorting function to operate on any 
+type on which a total ordering is defined, by providing the 
+comparison operator as a higher-order function parameter.")
+(change-view (shot0.gif))
+(change-cursor normal)
+(wait)
+
+(change-comment "In textual terms we want to turn this:
+
+    quicksort [] = []
+    quicksort (x:xs) = let
+        (left,right) = partition xs ([],[])
+        partition [] r = r
+        partition (y:ys) (ls,rs) = 
+            if y < x 
+            then partition ys (y:ls,rs)
+            else partition ys (ls,y:rs)
+        in (quicksort left) ++ (x:(quicksort right))
+")
+(wait)
+
+(change-comment "Into this:
+
+    quicksort-gen p [] = []
+    quicksort-gen p (x:xs) = let
+        (left,right) = partition xs ([],[])
+        partition [] r = r
+        partition (y:ys) (ls,rs) = 
+            if p y x 
+            then partition ys (y:ls,rs)
+            else partition ys (ls,y:rs)
+        in (quicksort-gen p left) ++ (x:(quicksort-gen p right))
+        
+    quicksort = quicksort-gen (<=)
+")
+(wait)
+
+(change-comment "Let us begin.  First, we make a binding for the new function, 
+with the new predicate argument.")
+(wait)
+
+(mouse-sequence)
+(change-view (shot0.gif name-quicksort-gen1.gif))
+(mouse-sequence)
+(change-view (shot0.gif name-quicksort-gen2.gif))
+(mouse-sequence)
+(change-view (shot0.gif name-quicksort-gen3.gif))
+(mouse-sequence)
+(change-view (shot1.gif))
+(change-comment "To open the new definition body up in a new window, we
+right click (or control click) on its name.")
+(wait)
+
+(mouse-sequence)
+(change-view (shot1.gif shot2.gif))
+(change-comment "We fill in the first equation and add the second.")
+(wait)
+
+(mouse-sequence)
+(change-view (shot3.gif shot2.gif))
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot3.gif shot4.gif))
+(change-cursor normal)
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-aview (shot3.gif shot5.gif))
+(change-cursor normal)
+(change-comment "Next we set up the constructor patterns for the second
+equation.")
+(wait)
+
+(mouse-sequence)
+(change-view (shot3.gif shot4.gif shot6.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot8.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot11.gif))
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot3.gif shot12.gif))
+(change-cursor normal)
+(change-comment "To construct the body of the new function, we will use
+the body of the old as a template.  We open up the
+original quicksort definition.")
+(wait)
+
+(mouse-sequence)
+(change-view (shot3.gif shot12.gif shot13.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot12.gif shot14.gif))
+(change-comment "We select the LET body and make a copy.")
+(wait)
+
+(mouse-sequence)
+(change-view (shot3.gif shot12.gif shot15.gif))
+(mouse-sequence)
+(change-cursor grab)
+(change-comment "We drop this body into place.  Note that this attempted 
+copy drags several variables outside their legitimate scope.  
+We acknowlege this fact and allow the VFPE to replace the
+variables with placeholders.")
+(wait)
+
+(mouse-sequence)
+(change-view (shot3.gif shot12.gif shot15.gif out-of-scope.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot16.gif shot14.gif))
+(change-comment "We don't need the old definition open now so we close it.")
+(wait)
+
+(change-view (shot3.gif shot16.gif))
+(change-comment "We now need to fill in the placeholders with the correct
+values.  First we do the 'x' pivot value in the list
+concatenation.")
+(wait)
+
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-comment (shot3.gif shot17.gif))
+(change-cursor normal)
+(change-comment "Next we do the 'xs' argument to the call to 'partition in the
+definition of 'left' and 'right'")
+(wait)
+
+(mouse-sequence)
+(change-view (shot3.gif shot17.gif shot18.gif))
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot3.gif shot17.gif shot19.gif))
+(change-cursor normal)
+(change-comment "Next we make use of the new higher-order function parameter.
+We cut away the pre-existing '<=' application and replace it
+with an application of the 'p' predicate binding.")
+(wait)
+
+(mouse-sequence)
+(change-view (shot3.gif shot17.gif shot20.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot17.gif shot21.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot17.gif shot100.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot17.gif shot22.gif))
+(change-cursor grab)
+(mouse-sequence)
+(change-cursor normal)
+(mouse-sequence)
+(change-view (shot3.gif shot17.gif shot22.gif apply1.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot17.gif shot22.gif))
+(change-cursor grab)
+(mouse-seqence)
+(change-view (shot3.gif shot17.gif shot23.gif))
+(change-cursor normal)
+(change-comment "Then we fill in its arguments.")
+(wait)
+
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot3.gif shot17.gif shot24.gif))
+(change-cursor normal)
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot3.gif shot17.gif shot25.gif))
+(change-cursor normal)
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot3.gif shot17.gif shot26.gif))
+(change-cursor normal)
+(mouse-sequence)
+(change-view (shot3.gif shot17.gif shot26.gif shot101.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot17.gif shot102.gif))
+(change-comment "The final (and slightly tricky) thing left to do is replace the
+'quicksort' recursive calls with calls to the new function.
+First we cut the old function references out.  Note that if
+we had created our new function as a binding of a completely
+new Let expression, these function references would have
+gone out of scope and been replace by placeholders in the
+same was as the 'x' and 'xs' references.")
+(wait)
+
+(change-comment "The astute viewer may now be asking the question 'how are
+we going to get the 'quicksort-gen' function into the place
+of the old 'quicksort' call when the types don't match up ?'
+The answer is that we create a partial application of
+'quicksort-gen', with 'p' as the first argument.  This
+expression then has the correct type.")
+(wait)
+
+(mouse-sequence)
+(change-view (shot3.gif shot17.gif shot103.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot104.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot105.gif))
+(change-cursor grab)
+(mouse-sequence)
+(change-cursor normal)
+(mouse-sequence)
+(change-cursor (shot3.gif shot105.gif apply1.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot105.gif))
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot3.gif double-apply.gif))
+(change-cursor normal)
+(mouse-sequence)
+(change-view (shot106.gif double-apply.gif))
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot106.gif shot107.gif))
+(change-cursor normal)
+(mouse-sequence)
+(change-view (shot3.gif shot107.gif))
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot3.gif shot108.gif))
+(change-cursor normal)
+(mouse-sequence)
+(change-view (shot3.gif shot108.gif shot109.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot110.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot108.gif shot111.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot112.gif))
+(change-comment "In order to stave off boredom, we do the next one a little
+differently.")
+(wait)
+
+(mouse-sequence)
+(change-view (shot3.gif shot113.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot114.gif))
+(change-cursor grab)
+(mouse-sequence)
+(change-cursor normal)
+(mouse-sequence)
+(change-view (shot3.gif shot115.gif))
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot3.gif shot116.gif))
+(change-cursor normal)
+(mouse-sequence)
+(mouse-sequence)
+(change-view (shot3.gif shot117.gif))
+(change-cursor grab)
+(mouse-sequence)
+(change-cursor normal)
+(mouse-sequence)
+(change-view (shot3.gif shot117.gif shot118.gif))
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot3.gif shot119.gif))
+(change-comment "As a finishing touch, we can use the 'curry/uncurry'
+layout operations to make this take on the customary
+appearence of a function application.")
+(wait)
+
+(change-comment "The old quicksort can now be expressed as a partial
+application of the new.")
+(wait)
+
+(mouse-sequence)
+(change-view (shot3.gif shot14.gif))
+(mouse-sequence)
+(change-view (shot3.gif shot28.gif))
+(mouse-sequence)
+(change-view (shot3.gif empty-quicksort.gif))
+(mouse-sequence)
+(change-view (shot3.gif empty-quicksort.gif apply1.gif))
+(mouse-sequence)
+(change-view (shot3.gif empty-quicksort.gif))
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot3.gif shot29.gif))
+(change-cursor normal)
+(mouse-sequence)
+(change-view (shot30.gif shot29.gif))
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot30.gif shot31.gif))
+(change-cursor normal)
+(mouse-sequence)
+(change-view (shot33.gif shot31.gif))
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot33.gif apply-qs-gen-to-lt.gif))
+(change-cursor normal)
+(mouse-sequence)
+(change-view (shot34.gif apply-qs-gen-to-lt.gif))
+(mouse-sequence)
+(change-view (shot34.gif apply-qs-gen-to-lt.gif shot35.gif))
+(mouse-sequence)
+(change-view (shot34.gif qs-gen-with-lt.gif))
+(change-comment "No edit is complete without testing.  We apply the new quicksort
+definition to a short list stored in a file ...")
+(wait)
+
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot36.gif))
+(change-cursor normal)
+(mouse-sequence)
+(mouse-sequence)
+(change-cursor grab)
+(change-view (shot36.gif))
+(mouse-sequence)
+(change-view (shot37.gif))
+(change-comment "... and then evaluate it.")
+(wait)
+
+(mouse-sequence)
+(change-view (shot40.gif))
+(mouse-sequence)
+(change-view (shot41.gif))
+(change-comment "That concludes this example.")
+(wait)
+
+)

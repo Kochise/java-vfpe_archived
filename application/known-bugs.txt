@@ -1,0 +1,77 @@
+VFPE version 0.1 known bugs
+---------------------------
+
+External Format Restrictions
+
+  The VFPE currenly only allows self-contained expressions
+  (i.e. expressions with no free variables except references
+  to Prelude functions) to be saved and loaded.
+  
+  Also, please be aware that the save format of the VFPE is
+  not very nice (it's serialised Java objects).  Due to bad
+  planning, it is not readable or convertable without the
+  VFPE classes.
+  
+  The Haskell output writes a Haskell file with top-level
+  definitions taken from a single Let expression, which must
+  be self-contained.
+  
+Bugs
+
+  * Interpreter overwrites function definitions during
+    reduction.  This will destroy all your nice partial
+    applications etc, so save your programs before
+    executing.
+  * Runs out of nice type variable names.
+  * Nodes are difficult to click: a small motion during
+    pressing them will not register as a click.
+  * When a large executing program shrinks back, the
+    program can disappear from the display and cannot
+    be shown again.
+  * Similarly, using the <- (don't show bindings) on
+    Let nodes can make the program disappear..
+  * Pallet redrawing is very flickery.
+  * Deleting a Let binding leaves open definition windows.
+  * Unfolded Apply nodes should have bold left-hand link.
+  * Tool-tip windows don't disappear when a dialog is
+    activated.
+  * Renaming a binding doesn't cause re-layout.
+  * For large nodes, inks should be drawn to box-tops, 
+    not centres.
+
+Feature Requests
+
+  * Keyboard controls for
+      cut, copy, delete, rename binding, show binding,
+      quick-save, quick-load
+  * Put editable binding name text field on binding control
+    panel.
+  * Improved temporal and spatial filtering for interpreter.
+  * Node info popups for binding labels on Let nodes.
+  * "show binding" control for variables.
+  * "+" buttons for Patterns, Lists and Guards.
+  * "drop on Let +" definition.
+  * Interpreter should select Placeholder and Lambda-bound
+    variables when they cause a program error.
+  * "show only one constructor" mode for Datatypes.
+  * New pattern case should base binding names on previous
+    case.
+  * Attaching a variable to the function (left-most) slot
+    of an Apply node could auto-hide the apply.
+  * Convert single-case Pattern to Lambda.
+  * Let bindings (and binding labels on Let nodes) could
+    be shaded to show presence of Placeholders.
+  * Distinguish between "exported" and "internal" Let
+    bindings.
+  * Save and load expressions with free vars, as described
+    in thesis.
+  * Improve Haskell writing:
+      * have "write all let bindings on spine" operation ?
+  * Implement IO in interpreter.
+  * Implement "show" function in interpreter.
+  * "centre on selected node" operation.
+  * Allow standard escape codes in Char and String literals.
+  * A "promote binding" operation.
+  * An "add paramater to function" operation.
+  * Different counting modes for execution profiles.
+  * Type synonyms.

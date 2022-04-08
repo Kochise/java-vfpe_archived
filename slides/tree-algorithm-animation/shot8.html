@@ -1,0 +1,25 @@
+<title>Tree Insertion Example</title>
+
+<!-- colour styles for Joel's web pages -->
+<body bgcolor="#f0f0e0" link="#808000" vlink="#808000">
+<font face="arial">
+
+<p>
+<a href="shot1.html">start</a> | 
+<a href="shot9.html">next</a> | <a href="shot7.html">prev</a> |
+<a href="../../index.html#slideshows">menu</a>
+<p>
+The first invocation of <code>put'</code> has determined that
+the new element belongs on the right side of the tree: its
+key (2) is greater than the key at the top of the tree (1).
+Evaluation has stopped at the second invocation of <code>put'</code>,
+ready to insert the element into the right-hand branch.
+<br>
+Note that the tree value returned by the <code>put'</code> 
+function is wrapped in an application of the <code>bal</code> 
+function, which has the job of restoring the balance of the 
+tree if the insertion has caused an imbalance.
+<p>
+<center>
+<img src="shot8.gif">
+</center>

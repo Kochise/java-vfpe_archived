@@ -1,0 +1,130 @@
+
+"
+Hand-made script for testing movie applet player.
+(c) J Kyle Kelso 2001
+"
+
+(change-view ("shot0.gif"))
+(change-cursor normal)
+
+(change-comment
+"This example shows the steps in a very simple expression
+reduction, and demonstrates the difference between
+applicative-order and normal-order reduction.")
+(wait)
+
+(change-comment
+"Here is the textual equivalent to this program:
+
+    let
+        bottom = bottom
+        f x y = y * y
+    in f bottom 3
+")
+(wait)
+
+(change-comment
+"It can be seen that although the function 'f' is applied
+to two arguments, the first of which obviously does not
+terminate.")
+(wait)
+
+(change-comment
+"Let us begin reducing the body of the LET expression.")
+(wait)
+(mouse-sequence)
+(change-view (shot1.gif))
+(mouse-sequence)
+(change-view (shot2.gif))
+
+(change-comment
+"Well we didn't really even get started.  Let's look at the
+evaluation control settings to see why.")
+(wait)
+(mouse-sequence)
+(change-view (shot2.gif ec1.gif))
+
+(change-comment
+"The evaluation controls are set to AOR (applicative-order)
+and call-by-value reduction.  The first thing the interpreter
+did, therefore, was attempt to evaluate the first argument
+of the application.  The interpreter noticed a cycle in its
+search for a redex, and gave up (notice the message above
+the main panel.")
+(wait)
+
+(change-comment
+"Note that the detection of a cyclic path is one sufficient
+condition for non-termination.  There are of course other
+non-terminating computations that aren't detected this way.")
+(wait)
+
+(change-comment
+"We will reset the for the evaluation controls for NOR and
+call-by-need reduction.")
+(wait)
+(mouse-sequence)
+(change-view (shot2.gif ec2.gif))
+(mouse-sequence)
+(change-view (shot2.gif ec3.gif))
+(mouse-sequence)
+(change-view (shot2.gif ec4.gif))
+
+(change-comment
+"We now repeatedly reduce the application until we reach
+normal form.")
+(wait)
+(mouse-sequence)
+(change-view (shot3.gif ec4.gif))
+
+(change-comment
+"The first step unfolds the 'f' function definition")
+(wait)
+(change-view (shot4.gif ec4.gif))
+
+(change-comment
+"Next the beta-redex (APPLY node with LAMBDA node in the
+function position) is replaced with an environment (LET
+node) which binds the function arguments.")
+(wait)
+(change-view (shot5.gif ec4.gif))
+
+(change-comment
+"In the next step, the application of the 'multiply' primitive
+causes the reduction of its argument (since it is strict in
+both arguments).  This causes the 'y' value to be evaluated and
+fetched. Since it is already in normal form (it is a '3' 
+literal), the variable is replaced.")
+(wait)
+(change-comment)
+("As an administrative step, the 'x' binding has been deleted,
+since it is redundant.")
+(wait)
+(change-view (shot6.gif ec4.gif))
+
+(change-comment
+"The other 'y' variable is replaced.")
+(wait)
+(change-view (shot7.gif ec4.gif))
+
+(change-comment
+"The other redundant environment is removed.")
+(wait)
+(change-view (shot8.gif ec5.gif))
+
+(change-comment
+"The primitive 'multiply' function is reduced, leaving
+the expression in normal form.")
+(wait)
+
+(change-comment
+"Notice that the profile information has been updated
+to indicate that the user-defined 'f' function and the
+integer math multiply function have been applied once
+each.")
+(wait)
+
+(change-comment
+"That concludes this example.")
+
+)

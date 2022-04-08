@@ -1,0 +1,165 @@
+(
+"
+Hand-made script for testing movie applet player.
+(c) J Kyle Kelso 2001
+"
+(change-view (shot0.gif))
+(change-cursor normal)
+(change-comment 
+"This example uses the VFPE interpreter to demonstrate the
+difference between reduction with lazy and strict data
+constructor functions.  It demonstrates (in a trivial
+way) the use of partially evaluated infinite data objects")
+(wait)
+
+(change-comment 
+"The textual equivalent for this example's program is:
+
+    let
+        test = take 2 (repeat 42)
+    in take 2 (repeat 42)
+
+The 'repeat' function here is the function that produces
+a list of its argument repeated an infinite number of times.")
+(wait)
+
+(change-commnet
+"To set up this example, we will create a holding location 
+for the test expression, and load the expression from a file")
+(wait)
+(mouse-sequence)
+(change-view (shot0.gif new-binding-a.gif))
+(mouse-sequence)
+(change-view (shot0.gif new-binding-b.gif))
+(mouse-sequence)
+(change-view (shot1.gif))
+(mouse-sequence)
+(change-view (shot2.gif))
+(mouse-sequence)
+(change-view (shot2.gif load-a.gif))
+(mouse-sequence)
+(change-view (shot2.gif load-b.gif))
+(mouse-sequence)
+(change-cursor grab)
+(change-view) (shot2.gif))
+(mouse-sequence)
+(change-view (shot3.gif))
+(change-cursor normal)
+
+(change-comment
+"Since we want to use the test expression in several
+times, we duplicate it and reduce the copy so as not
+to mess up the original.")
+(wait)
+(mouse-sequence)
+(change-view (shot5.gif))
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot6.gif))
+(change-cursor normal)
+
+(change-comment
+"We begin reducing the expression.  For our first
+example the interpreter has been set for
+applicative-order but with non-strict constructor
+functions.")
+(wait)
+(mouse-sequence)
+(change-view (shot7.gif))
+(mouse-sequence)
+(change-view (shot8.gif))
+(wait)
+(change-view (shot9.gif))
+
+(change-comment
+"Let's speed things up by evaluating the expression
+until its in normal form.  This is done by pressing
+the evaluate button.")
+(wait)
+(mouse-sequence)
+(change-view (shot10.gif))
+
+(change-comment
+"Since the interpreter is set for non-strict
+constructor, evaluation stops when there is a
+constrution function appliction (the 'Cons' in
+this case) at the head of the expression.")
+(wait)
+
+(change-comment
+"Notice how the tail of the result list is not yet
+in normal form.  The VFPE allows any subexpression
+to be evaluated at any time: we can keep evaluating
+parts of the result if we wish.")
+(wait)
+(mouse-sequence)
+(change-view (shot11.gif))
+(mouse-sequence)
+(change-view (shot12.gif))
+(mouse-sequence)
+(change-view (shot13.gif))
+(mouse-sequence)
+(change-view (shot14.gif))
+
+(change-comment
+"For the next example, we will restore the original
+test expression.")
+(wait)
+(mouse-sequence)
+(change-view (shot15.gif))
+(mouse-sequence)
+(change-view (shot16.gif))
+(change-cursor grab)
+(mouse-sequence)
+(change-cursor normal)
+(mouse-sequence)
+(change-view (shot17.gif))
+(mouse-sequence)
+(change-cursor grab)
+(mouse-sequence)
+(change-view (shot18.gif))
+(change-cursor normal)
+
+(change-comment
+"For the next example, we will change the interpreter
+settings to use strict constructor functions.")
+(wait)
+(mouse-sequence)
+(change-view (shot18.gif ec-a.gif))
+(mouse-sequence)
+(change-view (shot18.gif ec-b.gif))
+(mouse-sequence)
+(change-sequence (shot18.gif))
+
+(change-comment
+"Now we begin reducing the expression.")
+(wait)
+(mouse-sequence)
+(change-view (shot19.gif))
+(mouse-sequence)
+(change-view (shot20.gif))
+(wait)
+(change-view (shot21.gif))
+
+(change-comment
+"We will expand the environment LET node so that
+we can see what is happening.")
+(mouse-sequence)
+(change-view (shot22.gif))
+
+(change-comment
+"Notice how with strict constructors the tail of
+the expression grows, while the 'take' application
+is never completed.")
+(mouse-sequence)
+(change-view (shot23.gif))
+(wait)
+(change-view (shot24.gif))
+(wait)
+(change-view (shot25.gif))
+
+(change-comment
+"That concludes this example.")
+
+)
